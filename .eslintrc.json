@@ -35,6 +35,8 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "react/prop-types": "off",
+        "space-before-function-paren":"off"
     }
 }
