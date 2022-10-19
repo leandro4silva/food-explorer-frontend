@@ -20,9 +20,26 @@ export default createGlobalStyle`
     }
 
     body{
-        font-size: 1.6rem;
+        font: 500 1.6rem "Roboto", sans-serif;
         background-color: ${({theme}) => theme.COLORS.BACKGROUND_800};
         color: ${({theme}) => theme.COLORS.TEXT_WHITE};
         -webkit-font-smoothing: antialiased;
     }
+
+    body, input, button, textarea{
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.6rem;
+        outline: none;
+    }
+
+
+    button, a{
+        cursor: pointer;
+        transition: filter 0.2;
+    }
+
+    button:hover, a:hover{
+        filter: brightness(0.9);
+    }
+
 `;

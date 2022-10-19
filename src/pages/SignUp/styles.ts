@@ -8,6 +8,7 @@ export const Container = styled.main`
     padding: 10.8rem 14.2rem;
 `;
 
+
 export const Logo = styled.h1`
     display: flex;
     align-items: center;
