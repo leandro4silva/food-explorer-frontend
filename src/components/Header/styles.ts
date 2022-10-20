@@ -16,11 +16,30 @@ export const Container = styled.header`
             gap: 3.2rem;
 
             >li{
+                flex-grow: 2;
+            }
+
+            >li:nth-child(1){
+                flex-grow: 0;
+            }
+
+            >li:nth-child(2){
                 flex-grow: 1;
+                text-align: center;
             }
 
             >li:nth-child(3){
-                flex-grow: 4;
+                flex-grow: 7;
+            }
+
+            >li:nth-child(4){
+                flex-grow: 2;
+            }
+
+            >li:nth-child(5){
+                flex-grow: 0;
+                display: flex;
+                justify-content: flex-end;
             }
         }        
     }

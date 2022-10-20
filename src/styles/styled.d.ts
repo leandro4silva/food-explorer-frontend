@@ -9,6 +9,7 @@ declare module 'styled-components' {
             BACKGROUND_700: string,
             BACKGROUND_600: string,
             BACKGROUND_500: string,
+            BACKGROUND_400: string,
 
             BACKGROUND_GRAY: string,
 
