@@ -29,6 +29,7 @@ export const Container = styled.div`
             margin-top: 1.6rem;
             font: 700 2.2rem "Poppins", sans-serif;
             line-height: 3.3rem;
+            text-align: center;
         }
 
         > p{

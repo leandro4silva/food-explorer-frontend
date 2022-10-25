@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { Container, Banner, FoodContent } from './styles';
+import { Container, Banner, Content } from './styles';
 import { Header } from '../../components/Header';
-import { FoodCard } from '../../components/FoodCard';
 import bannerImg from '../../assets/image/banner.png';
-
+import { SlideFood } from '../../components/SlideFood';
+import { Footer } from '../../components/Footer';
 
 export function Home() {
+
+
 	return (
 		<Container>
 			<Header />
@@ -17,13 +20,17 @@ export function Home() {
 					<p>Sinta o cuidado do preparo com ingredientes selecionados</p>
 				</div>
 			</Banner>
-			<FoodContent>
-				<h3>Pratos principais</h3>
-				<div>
-					<FoodCard />
-					<FoodCard />
-				</div>
-			</FoodContent>
+			<Content>
+				<h2>Pratos principais</h2>
+				<SlideFood/>
+				
+				<h2>Sobremesas</h2>
+				<SlideFood/>
+				
+				<h2>Bebidas</h2>
+				<SlideFood/>
+			</Content>
+			<Footer/>
 		</Container>
 	);
 }

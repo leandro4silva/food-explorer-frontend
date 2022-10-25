@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-    height: 100vh;
+   
+
 
 `;
 
@@ -45,17 +46,21 @@ export const Banner = styled.div`
 
 export const FoodContent = styled.div`
     margin-inline: 12.3rem ;
+    position: relative;
+    cursor: grab;
+    
+    .keen-slider{
+        margin-top: 3.9rem;
+    }
+`;
 
-    > h3{
+
+export const Content = styled.div`
+    margin-inline: 12.3rem ;
+    margin-bottom: 9.8rem;
+    > h2{
         margin-top: 6.3rem;
         font: 500 3.2rem "Poppins", sans-serif;
         line-height: 4.4rem;
-    }
-
-    > div{
-        margin-top: 3.95rem;
-        display: flex;
-        align-items: center;
-        gap: 2.7rem;
     }
 `;
