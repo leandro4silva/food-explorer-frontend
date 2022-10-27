@@ -22,7 +22,6 @@ export function SlideFood(){
 		created() {
 			setLoaded(true);
 		}
-
 	});
 
 	return(

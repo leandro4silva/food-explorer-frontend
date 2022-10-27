@@ -3,7 +3,7 @@ import { Container, Inventory, SignOut, Favorites } from './styles';
 import { Logo } from '../Logo';
 import { Search } from '../Search';
 
-import receiptIcon from '../../assets/receipt.svg';
+import  receiptIcon from '../../assets/receipt.svg';
 import signOutIcon from '../../assets/sign-out.svg';
 
 
