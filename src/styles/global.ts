@@ -7,6 +7,10 @@ export default createGlobalStyle`
         box-sizing: border-box;
     }
 
+    ul{
+        list-style: none;
+    }
+
     :root{
         font-size: 62.5%;
     }
