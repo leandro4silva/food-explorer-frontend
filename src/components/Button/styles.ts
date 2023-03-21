@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.button`
+interface ButtonProps{
+    hasIcon: boolean
+}
+
+export const Container = styled.button<ButtonProps>`
     background-color: ${({theme}) => theme.COLORS.BACKGROUND_RED_900};
     border-radius: 0.4rem;
     display: flex;
@@ -13,4 +17,6 @@ export const Container = styled.button`
     font-size: 1.4rem;
     border: none;
     color: #fff;
+    width: 100%;
+    gap: ${({hasIcon}) => hasIcon ? '0.8rem' : '0rem'};
 `

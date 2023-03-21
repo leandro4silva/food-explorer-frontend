@@ -1,13 +1,15 @@
-import { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import { Container } from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-    text: string
+    text: string,
+    Icon?: React.ElementType,
 }
 
-export function Button({ text, ...rest }:ButtonProps){
+export function Button({Icon, text, ...rest }:ButtonProps){
     return(
-        <Container {...rest}>
+        <Container hasIcon={Icon ? true : false}>
+            {Icon && <Icon size={34} />}
             { text }
         </Container>
     );

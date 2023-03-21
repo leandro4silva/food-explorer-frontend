@@ -1,15 +1,21 @@
 import { InputHTMLAttributes } from "react"
 import { Container } from "./styles"
+import { IconType } from 'react-icons'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-    label: string,
+    label?: string,
+    Icon?: IconType
 }
 
-export function Input({label, ...rest} : InputProps) {
+export function Input({ Icon, label, ...rest } : InputProps) {
     return (
         <Container>
-            <label htmlFor="name">{label}</label>
-            <input type="text" {...rest}/>
+            {/* { label && <label htmlFor="name">{label}</label> }
+             */}
+             <div>
+                { Icon && <Icon size={24}/> }
+                <input type="text" {...rest}/>
+            </div>
         </Container>
     )
 }

@@ -57,7 +57,7 @@ export const Content = styled.div`
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
-    gap: clamp(1rem, 0.6rem + 2vh, 3.2rem);
+    gap: clamp(1rem, 2.8rem + 1vh, 3.2rem);
     margin-top: clamp(2.2rem, 0.2rem + 0vh, 3.2rem);
     max-height: 100%;
     max-width: 100%;

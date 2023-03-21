@@ -5,26 +5,45 @@ export const Container = styled.div`
     flex-direction: column;
     gap: 0.8rem;
     text-align: left;
+    width: 100%;
 
     > label{
         font: 400 1.6rem 'Roboto',sans-serif;
         line-height: 1.6rem;
-        color: ${({theme}) => theme.COLORS.TEXT_GRAY_800};
+        color: ${({ theme }) => theme.COLORS.TEXT_GRAY_800};
     }
 
-    > input{
-        background: transparent;
-        border: 1px solid #FFFFFF;
-        border-radius: 0.8rem;
-        padding: 1.6rem 1.4rem;
-        color: #FFFFFF;
-        font-size: 1.6rem;
-        line-height: 1.6rem;
-
-        &::placeholder{
-            font: 400 1.6rem 'Roboto',sans-serif;
+    > div{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+        border: none;
+        border-radius: 0.4rem;    
+        
+        > input{
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-radius: 0.8rem;
+            padding: 1.6rem 1.4rem;
+            color: #FFFFFF;
+            font-size: 1.6rem;
             line-height: 1.6rem;
-            color: ${({theme}) => theme.COLORS.TEXT_GRAY_900};
+    
+            &::placeholder{
+                font: 400 1.6rem 'Roboto',sans-serif;
+                line-height: 1.6rem;
+                color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
+            }
+        }
+
+        > svg{
+            margin-left: 1.6rem;
+            color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
         }
     }
+
+    
+
 `
