@@ -21,13 +21,14 @@ export const Container = styled.div`
         border: none;
         border-radius: 0.4rem;    
         
+
         > input{
             width: 100%;
             background: transparent;
             border: none;
             border-radius: 0.8rem;
             padding: 1.6rem 1.4rem;
-            color: #FFFFFF;
+            color: ${({theme}) => theme.COLORS.TEXT_WHITE};
             font-size: 1.6rem;
             line-height: 1.6rem;
     
@@ -41,6 +42,14 @@ export const Container = styled.div`
         > svg{
             margin-left: 1.6rem;
             color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
+        }
+    }
+
+    > div:focus-within{
+        border: 1px solid ${({theme}) => theme.COLORS.TEXT_GRAY_700};
+
+        > svg{
+            color: ${({theme}) => theme.COLORS.TEXT_GRAY_700};
         }
     }
 

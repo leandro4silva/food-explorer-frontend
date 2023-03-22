@@ -1,12 +1,19 @@
 import { Header } from "../../components/Header";
-import { Container, Content } from "./styles";
+import { Banner } from "../../components/Banner";
+import { DishList } from "../../components/DishList";
+import { Container, Content, ProductList, BannerContent } from "./styles";
 
 export function Home(){
     return(
         <Container>
             <Header />
             <Content>
-                <h1>Hello World</h1>
+                <BannerContent>
+                    <Banner />
+                </BannerContent>
+                <ProductList>
+                    <DishList />
+                </ProductList>
             </Content>
         </Container>
     )

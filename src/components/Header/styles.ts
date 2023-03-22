@@ -4,11 +4,11 @@ export const Container = styled.header`
     padding-block: 2.7rem;
     padding-inline: 12.3rem;   
     background: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+    width: 100%;
 `
 
 export const Nav = styled.nav`
     width: 100%;
-    max-width: 100%;
 `
 
 export const ListItens = styled.ul`
