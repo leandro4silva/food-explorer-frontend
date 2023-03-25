@@ -23,6 +23,12 @@ export const Logo = styled.li`
         display: flex;
         align-items: center;
         gap: 1.1rem;
+
+        > img {
+            width: 3rem;
+            height: 3rem;
+        }
+
         > h2{
             font: 700 2.5rem 'Roboto',sans-serif;
             line-height: 2.9rem;
@@ -48,3 +54,7 @@ export const SignOutButton = styled.button`
     border: none;
 `
 
+
+export const Popover = styled.div`
+    background: red;
+`

@@ -1,10 +1,13 @@
-import {HeartStraight} from '@phosphor-icons/react'
+import { HTMLAttributes, HtmlHTMLAttributes } from "react"
+import {HeartStraight, Minus, Plus} from '@phosphor-icons/react'
 import { Item } from './styles'
 import ParmaToast from '../../assets/images/Dishes/parma-toast.png';
 
-export function DishListItem() {
+interface DishListItemProps extends HtmlHTMLAttributes<HTMLDivElement>{}
+
+export function DishListItem({ ...rest}: DishListItemProps) {
     return (
-        <Item>
+        <Item {...rest}>
             <button className="favorite">
                 <HeartStraight size={32} />
             </button>
@@ -19,6 +22,20 @@ export function DishListItem() {
             </div>
             <div className='price'>
                 <h3>R$ 25,97</h3>
+            </div>
+            <div className='itembox'>
+                <div className='amount'>
+                    <button>
+                        <Minus size={24} />
+                    </button>
+                    <span>01</span>
+                    <button>
+                        <Plus size={24}/>
+                    </button>
+                </div>
+                <button className='add-to-cart'>
+                    incluir
+                </button>
             </div>
         </Item>
     )

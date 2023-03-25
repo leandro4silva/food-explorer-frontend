@@ -17,7 +17,8 @@ declare module 'styled-components' {
             BACKGROUND_RED_700: string,
 
             TEXT_WHITE: string,
-
+            
+            TEXT_GRAY_200: String,
             TEXT_GRAY_700: string,
             TEXT_GRAY_800: string,
             TEXT_GRAY_900: string,

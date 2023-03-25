@@ -10,8 +10,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
 export function Input({ Icon, label, ...rest } : InputProps) {
     return (
         <Container>
-            {/* { label && <label htmlFor="name">{label}</label> }
-             */}
              <div>
                 { Icon && <Icon size={24}/> }
                 <input type="text" {...rest}/>
