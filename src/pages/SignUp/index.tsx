@@ -1,5 +1,5 @@
 import { Container, Logo, Content, Form } from "./styles";
-import Polygon from '../../assets/logo/Polygon.svg';
+import Polygon from '../../assets/logo/polygon-blue.svg';
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { useNavigate} from 'react-router-dom';
@@ -41,7 +41,7 @@ export function SignUp() {
                         <Button 
                             text="Criar conta"
                         />
-                        <button className="link" onClick={() => navigate("/login")}>Já tenho uma conta</button>
+                        <button className="link" onClick={() => navigate("/")}>Já tenho uma conta</button>
                     </Form>
                 </div>
             </Content>

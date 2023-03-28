@@ -2,9 +2,8 @@ import { Container, Nav, ListItens, Logo, NavItem, Link, SignOutButton } from ".
 import { Input } from "../Input";
 import { Button } from "../Button";
 import Polygon from '../../assets/logo/polygon-blue.svg';
-import {FiSearch} from 'react-icons/fi'
-import {Receipt, SignOut} from '@phosphor-icons/react'
-import * as Popover from '@radix-ui/react-popover';
+import { FiSearch } from 'react-icons/fi'
+import { Receipt, SignOut } from '@phosphor-icons/react'
 
 
 export function Header() {
@@ -24,23 +23,15 @@ export function Header() {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Input Icon={FiSearch} placeholder="Busque pelas opções de pratos"/>
+                        <Input Icon={FiSearch} placeholder="Busque pelas opções de pratos" />
                     </NavItem>
                     <NavItem>
                         <Button Icon={Receipt} text="Meu pedido (0)" />
                     </NavItem>
                     <NavItem>
-                        <Popover.Root>
-                            <Popover.Trigger>
-                                <SignOutButton>
-                                    <SignOut size={32} />
-                                </SignOutButton>
-                            </Popover.Trigger>
-                            <Popover.Content>
-                                
-
-                            </Popover.Content>
-                        </Popover.Root>
+                        <SignOutButton title="Sair">
+                            <SignOut size={32} />
+                        </SignOutButton>
                     </NavItem>
                 </ListItens>
             </Nav>

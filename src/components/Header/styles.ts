@@ -54,7 +54,3 @@ export const SignOutButton = styled.button`
     border: none;
 `
 
-
-export const Popover = styled.div`
-    background: red;
-`

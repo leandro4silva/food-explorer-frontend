@@ -1,6 +1,6 @@
 import { Container, Logo, Content, Form } from "./styles";
 import { useNavigate } from 'react-router-dom';
-import Polygon from '../../assets/logo/Polygon.svg';
+import Polygon from '../../assets/logo/polygon-blue.svg';
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
