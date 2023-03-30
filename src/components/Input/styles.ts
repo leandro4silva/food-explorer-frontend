@@ -13,46 +13,72 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.COLORS.TEXT_GRAY_800};
     }
 
-    > div{
-        width: 100%;
+    > div.input-group{
         display: flex;
-        align-items: center;
-        background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
-        border: none;
-        border-radius: 0.4rem;    
-        
+        flex-direction: column;
+        gap: 0.2rem;
 
-        > input{
+        > div{
             width: 100%;
-            background: transparent;
+            display: flex;
+            align-items: center;
+            background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
             border: none;
-            border-radius: 0.8rem;
-            padding: 1.6rem 1.4rem;
-            color: ${({theme}) => theme.COLORS.TEXT_WHITE};
-            font-size: 1.6rem;
-            line-height: 1.6rem;
-    
-            &::placeholder{
-                font: 400 1.6rem 'Roboto',sans-serif;
+            border-radius: 0.4rem;    
+                
+        
+            > input{
+                width: 100%;
+                background: transparent;
+                border: none;
+                border-radius: 0.8rem;
+                padding: 1.6rem 1.4rem;
+                color: ${({ theme }) => theme.COLORS.TEXT_WHITE};
+                font-size: 1.6rem;
                 line-height: 1.6rem;
+            
+                &::placeholder{
+                    font: 400 1.6rem 'Roboto',sans-serif;
+                    line-height: 1.6rem;
+                    color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
+                }
+            }
+        
+            > svg{
+                margin-left: 1.6rem;
                 color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
             }
         }
+        
+            > div:focus-within{
+                border: 1px solid ${({ theme }) => theme.COLORS.TEXT_GRAY_700};
+        
+                > svg{
+                    color: ${({ theme }) => theme.COLORS.TEXT_GRAY_700};
+                }
+            }
+        
+            > div.has-error{
+                border: 1px solid ${({ theme }) => theme.COLORS.ERROR_COLOR};
+            }
+        
+            > div.has-error:focus-within{
+                border: 1px solid ${({ theme }) => theme.COLORS.ERROR_COLOR};
+        
+                > svg{
+                    color: ${({ theme }) => theme.COLORS.ERROR_COLOR};
+                }
+        
+            }
 
-        > svg{
-            margin-left: 1.6rem;
-            color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
-        }
+            > span {
+                color: ${({ theme }) => theme.COLORS.ERROR_COLOR};
+                display: flex;
+                align-items: center;
+                gap: 0.2rem;
+                font: 400 1.4rem 'Roboto',sans-serif;
+            }
     }
 
-    > div:focus-within{
-        border: 1px solid ${({theme}) => theme.COLORS.TEXT_GRAY_700};
-
-        > svg{
-            color: ${({theme}) => theme.COLORS.TEXT_GRAY_700};
-        }
-    }
-
-    
 
 `
