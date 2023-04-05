@@ -2,29 +2,58 @@ import { Container, Logo, Content, Form } from "./styles";
 import Polygon from '../../assets/logo/polygon-blue.svg';
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { signUpValidate } from "./validate";
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
-
-
-interface userProps{
-    name: string,
-    email: string,
-    password: string
-}
-
+import { api } from "../../services/api";
+import { useEffect } from "react";
+import { ToastContent, toastAlert } from '../../components/Toast';
+import { useAuth } from "../../hooks/auth"
 
 export function SignUp() {
-    const navigate = useNavigate();
-    const {register, handleSubmit, formState: {errors, isSubmitting}, } = useForm({
+    const { register, handleSubmit, formState: { errors, isSubmitting }, } = useForm({
         resolver: zodResolver(signUpValidate)
-    })
+    });
+
+    const {signIn} = useAuth();
     
-    const onSubmit: SubmitHandler<userProps> = ({email, name, password}) => {
-        event?.preventDefault();
-        console.log('teste');
+    const navigate = useNavigate(); 
+
+    const onSubmit: SubmitHandler<FieldValues> = async ({ email, name, password }) => {
+        try {
+            const response = await api.post('/users', {
+                email,
+                name,
+                password
+            })
+
+            if (response.status = 201) {
+                const isLogged = await signIn({email, password});
+                console.log(isLogged);
+            }
+        } catch (error: any) {
+            if (error.response) {
+                alert(error.response.data.message);
+            } else {
+                alert('Não foi possivel realizar o cadastro, tente novamente mais tarde')
+            }
+        }
     }
+
+    useEffect(() => {
+        let hasError = false;
+        
+        Object.keys(errors).map((error) => {
+            if(error){
+                hasError = true
+            }
+        })
+
+        if(hasError){
+            toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.')
+        }
+    }, [errors]);
 
     return (
         <Container>
@@ -37,8 +66,8 @@ export function SignUp() {
             <Content>
                 <div>
                     <h2>Crie sua conta</h2>
-                    <Form onSubmit={handleSubmit(() => onSubmit)}>
-                        <Input 
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                        <Input
                             label="Seu nome"
                             name="name"
                             type="text"
@@ -63,14 +92,15 @@ export function SignUp() {
                             error={errors.password?.message?.toString()}
                         />
                         <Button
-                            type="submit" 
+                            type="submit"
                             text="Criar conta"
                             loading={isSubmitting}
                         />
-                        <button className="link" onClick={() => navigate("/")}>Já tenho uma conta</button>
+                        <button type="button" className="link" onClick={() => navigate("/")}>Já tenho uma conta</button>
                     </Form>
                 </div>
             </Content>
+            <ToastContent />
         </Container>
     );
 }
