@@ -4,10 +4,10 @@ import { Container } from "./styles";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     text: string,
     Icon?: React.ElementType,
-    loading: boolean
+    loading?: boolean
 }
 
-export function Button({Icon, text, loading, ...rest }:ButtonProps){
+export function Button({Icon, text, loading = false, ...rest }:ButtonProps){
     return(
         <Container hasIcon={Icon ? true : false}>
             {

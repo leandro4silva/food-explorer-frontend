@@ -4,9 +4,19 @@ import { Button } from "../Button";
 import Polygon from '../../assets/logo/polygon-blue.svg';
 import { FiSearch } from 'react-icons/fi'
 import { Receipt, SignOut } from '@phosphor-icons/react'
+import { useAuth } from '../../hooks/auth';
+import { useNavigate } from "react-router-dom";
 
 
 export function Header() {
+    const navigate = useNavigate();
+    const {signOut} = useAuth();
+
+    function handleSignOut(){
+        signOut();
+        navigate("/");
+    }
+
     return (
         <Container>
             <Nav>
@@ -29,7 +39,7 @@ export function Header() {
                         <Button Icon={Receipt} text="Meu pedido (0)" />
                     </NavItem>
                     <NavItem>
-                        <SignOutButton title="Sair">
+                        <SignOutButton type="button" title="Sair" onClick={handleSignOut}>
                             <SignOut size={32} />
                         </SignOutButton>
                     </NavItem>

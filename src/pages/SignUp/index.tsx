@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { ToastContent, toastAlert } from '../../components/Toast';
 import { useAuth } from "../../hooks/auth"
 
+
 export function SignUp() {
     const { register, handleSubmit, formState: { errors, isSubmitting }, } = useForm({
         resolver: zodResolver(signUpValidate)
@@ -30,13 +31,13 @@ export function SignUp() {
 
             if (response.status = 201) {
                 const isLogged = await signIn({email, password});
-                console.log(isLogged);
+                isLogged ? navigate("/") : null
             }
         } catch (error: any) {
             if (error.response) {
-                alert(error.response.data.message);
+                toastAlert(error.response.data.message);
             } else {
-                alert('Não foi possivel realizar o cadastro, tente novamente mais tarde')
+                toastAlert('Não foi possivel realizar o cadastro, tente novamente mais tarde')
             }
         }
     }

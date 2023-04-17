@@ -23,9 +23,14 @@ interface AuthProps {
     token: string
 }
 
+interface AuthError{
+    type: string,
+    message: string
+}
+
 interface AuthContextProps {
     user?: UserProps,
-    signIn(data: SignInProps) : Promise<boolean>
+    signIn(data: SignInProps) : Promise<AuthError | undefined>
     signOut() :void
 }
 
@@ -49,14 +54,18 @@ function AuthProvider(props: AuthProviderProps) {
             api.defaults.headers.common["Authorization"] = `Bearer ${token}`
             setData({ user, token });
             
-            return true;
         } catch (error: any) {
             if (error.response) {
-                alert(error.response.data.message);
+                return {
+                    type: 'auth',
+                    message: error.response.data.message
+                };
             } else {
-                alert('Não foi possivel logar no sistema, tente novamente mais tarde.');
+                return {
+                    type: 'system',
+                    message: 'Não foi possivel logar no sistema, tente novamente mais tarde.'
+                };
             }
-            return false;
         }
     }
 
