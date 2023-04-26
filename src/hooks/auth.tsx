@@ -7,7 +7,8 @@ interface AuthProviderProps {
 
 interface SignInProps {
     email: string,
-    password: string
+    password: string, 
+    isAdmin: boolean
 }
 
 interface UserProps {
@@ -16,6 +17,7 @@ interface UserProps {
     username: string,
     email: string,
     password: string,
+    isAdmin: boolean
 }
 
 interface AuthProps {
@@ -31,7 +33,7 @@ interface AuthError{
 interface AuthContextProps {
     user?: UserProps,
     signIn(data: SignInProps) : Promise<AuthError | undefined>
-    signOut() :void
+    signOut(isAdmin: boolean) :void
 }
 
 const AuthContext = createContext<AuthContextProps | null>(null);
@@ -43,13 +45,20 @@ function AuthProvider(props: AuthProviderProps) {
         try {
             const response = await api.post("/sessions", {
                 email: props.email,
-                password: props.password
-            })
+                password: props.password,
+                isAdmin: props.isAdmin 
+            }); 
 
-            const { user, token } = response.data;
+            const user = {...response.data.user, isAdmin: props.isAdmin};
+            const token = response.data.token;
 
-            localStorage.setItem("@foodexplorer:user", JSON.stringify(user))
-            localStorage.setItem("@foodexplorer:token", token)
+            if(props.isAdmin){
+                localStorage.setItem("@foodexplorer:admin", JSON.stringify(user));
+                localStorage.setItem("@foodexplorer:admin-token", token);
+            }else{
+                localStorage.setItem("@foodexplorer:user", JSON.stringify(user));
+                localStorage.setItem("@foodexplorer:user-token", token);
+            }
 
             api.defaults.headers.common["Authorization"] = `Bearer ${token}`
             setData({ user, token });
@@ -69,9 +78,14 @@ function AuthProvider(props: AuthProviderProps) {
         }
     }
 
-    function signOut(){
-        localStorage.removeItem('@foodexplorer:user')
-        localStorage.removeItem('@foodexplorer:token')
+    function signOut(isAdmin: boolean){
+        if(isAdmin){
+            localStorage.removeItem('@foodexplorer:admin')
+            localStorage.removeItem('@foodexplorer:admin-token')
+        }else{
+            localStorage.removeItem('@foodexplorer:user')
+            localStorage.removeItem('@foodexplorer:user-token')
+        }
         setData(null)
     }
 

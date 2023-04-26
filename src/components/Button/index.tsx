@@ -12,7 +12,7 @@ export function Button({Icon, text, loading = false, ...rest }:ButtonProps){
         <Container hasIcon={Icon ? true : false}>
             {
                 loading ? 
-                    'Carregando'
+                    'Carregando...'
                 :
                 <>
                     {Icon && <Icon size={34} />}

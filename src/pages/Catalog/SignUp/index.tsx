@@ -1,25 +1,25 @@
 import { Container, Logo, Content, Form } from "./styles";
-import Polygon from '../../assets/logo/polygon-blue.svg';
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+import Polygon from '../../../assets/logo/polygon-blue.svg';
+import { Input } from "../../../components/Input";
+import { Button } from "../../../components/Button";
 import { useNavigate } from 'react-router-dom';
 import { signUpValidate } from "./validate";
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
-import { api } from "../../services/api";
+import { api } from "../../../services/api";
 import { useEffect } from "react";
-import { ToastContent, toastAlert } from '../../components/Toast';
-import { useAuth } from "../../hooks/auth"
+import { ToastContent, toastAlert } from '../../../components/Toast';
+import { useAuth } from "../../../hooks/auth"
 
 
 export function SignUp() {
-    const { register, handleSubmit, formState: { errors, isSubmitting }, } = useForm({
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting }, } = useForm({
         resolver: zodResolver(signUpValidate)
     });
 
-    const {signIn} = useAuth();
-    
-    const navigate = useNavigate(); 
+    const { signIn } = useAuth();
+
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FieldValues> = async ({ email, name, password }) => {
         try {
@@ -27,15 +27,16 @@ export function SignUp() {
                 email,
                 name,
                 password
-            })
+            });
 
             if (response.status = 201) {
-                const isLogged = await signIn({email, password});
-                isLogged ? navigate("/") : null
+                const hasError = await signIn({ email, password });
+                !hasError ? navigate("/") : null
             }
         } catch (error: any) {
-            if (error.response) {
-                toastAlert(error.response.data.message);
+            if (error.response && error.response.data.type == 'email') {
+                setError('email', { type: 'custom', message: error.response.data.message })
+                toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.');
             } else {
                 toastAlert('Não foi possivel realizar o cadastro, tente novamente mais tarde')
             }
@@ -44,15 +45,15 @@ export function SignUp() {
 
     useEffect(() => {
         let hasError = false;
-        
+
         Object.keys(errors).map((error) => {
-            if(error){
+            if (error) {
                 hasError = true
             }
         })
 
-        if(hasError){
-            toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.')
+        if (hasError) {
+            toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.');
         }
     }, [errors]);
 

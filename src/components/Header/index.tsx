@@ -13,7 +13,7 @@ export function Header() {
     const {signOut} = useAuth();
 
     function handleSignOut(){
-        signOut();
+        signOut(false);
         navigate("/");
     }
 

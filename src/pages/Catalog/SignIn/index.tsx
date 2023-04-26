@@ -1,13 +1,13 @@
 import { Container, Logo, Content, Form } from "./styles";
 import { useNavigate } from 'react-router-dom';
-import Polygon from '../../assets/logo/polygon-blue.svg';
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+import Polygon from '../../../assets/logo/polygon-blue.svg';
+import { Input } from "../../../components/Input";
+import { Button } from "../../../components/Button";
 import { signInValidate } from "./validate";
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth } from "../../hooks/auth";
-import { ToastContent, toastAlert } from '../../components/Toast';
+import { useAuth } from "../../../hooks/auth";
+import { ToastContent, toastAlert } from '../../../components/Toast';
 import { useEffect } from "react";
 
 
@@ -24,7 +24,8 @@ export function SignIn() {
     const onSubmit: SubmitHandler<FieldValues> = async ({ email, password }) => {
         const error = await signIn({
             email,
-            password
+            password,
+            isAdmin: false
         });
 
         if (error?.type == 'auth') {
