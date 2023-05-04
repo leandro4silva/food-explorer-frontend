@@ -10,10 +10,7 @@ export function Router(){
     return(
         <BrowserRouter>
             {
-                user ? 
-                    (user.isAdmin ? <AdminRoutes/> : <AppRoutes />) 
-                : 
-                    <AuthRoutes />
+                user ? (user.isAdmin == true ? <AdminRoutes /> : <AppRoutes />) : <AuthRoutes />
             }
         </BrowserRouter>
     );

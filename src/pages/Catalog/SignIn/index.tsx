@@ -20,7 +20,6 @@ export function SignIn() {
 
     const { signIn } = useAuth();
 
-
     const onSubmit: SubmitHandler<FieldValues> = async ({ email, password }) => {
         const error = await signIn({
             email,

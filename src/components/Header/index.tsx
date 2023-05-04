@@ -7,8 +7,11 @@ import { Receipt, SignOut } from '@phosphor-icons/react'
 import { useAuth } from '../../hooks/auth';
 import { useNavigate } from "react-router-dom";
 
+interface HeaderProps {
+    isAdmin?: boolean
+}
 
-export function Header() {
+export function Header({isAdmin = false} : HeaderProps) {
     const navigate = useNavigate();
     const {signOut} = useAuth();
 

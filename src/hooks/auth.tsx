@@ -90,18 +90,28 @@ function AuthProvider(props: AuthProviderProps) {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem("@foodexplorer:token");
-        const user = localStorage.getItem("@foodexplorer:user");
+        const admin = localStorage.getItem("@foodexplorer:admin");
+        const adminToken = localStorage.getItem("@foodexplorer:admin-token");
+        const user = localStorage.getItem("@foodexplorer:user"); 
+        const userToken = localStorage.getItem("@foodexplorer:user-token"); 
 
-        if(token && user){
-            api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        if(adminToken && admin){
+            api.defaults.headers.common["Authorization"] = `Bearer ${adminToken}`;
 
             setData({
-                token,
-                user: JSON.parse(user)
+                token: adminToken,
+                user: JSON.parse(admin)
             })
         }
 
+        if(userToken && user){
+            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+
+            setData({
+                token: userToken,
+                user: JSON.parse(user)
+            })
+        }
     }, [])
 
     return (

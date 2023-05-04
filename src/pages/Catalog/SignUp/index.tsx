@@ -30,7 +30,7 @@ export function SignUp() {
             });
 
             if (response.status = 201) {
-                const hasError = await signIn({ email, password });
+                const hasError = await signIn({ email, password, isAdmin: false });
                 !hasError ? navigate("/") : null
             }
         } catch (error: any) {
