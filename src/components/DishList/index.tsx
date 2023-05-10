@@ -4,8 +4,12 @@ import { Arrow } from "./Arrow";
 import { useKeenSlider } from 'keen-slider/react'
 import { useState } from "react";
 
+interface DishListProps{
+    title: string,
+    isAdmin: boolean
+}
 
-export function DishList() {
+export function DishList({ title, isAdmin = false }: DishListProps) {
     const [loaded, setLoaded] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [sliderRef, instanceRef] = useKeenSlider({
@@ -24,15 +28,15 @@ export function DishList() {
 
     return (
         <Container>
-            <Title>Pratos principais</Title>
+            <Title>{ title }</Title>
             <WrapperNavigation>
                 <Carousel ref={sliderRef} className="keen-slider">
-                    <DishListItem className="keen-slider__slide"/>
-                    <DishListItem className="keen-slider__slide"/>
-                    <DishListItem className="keen-slider__slide"/>
-                    <DishListItem className="keen-slider__slide"/>
-                    <DishListItem className="keen-slider__slide"/>
-                    <DishListItem className="keen-slider__slide"/>
+                    <DishListItem className="keen-slider__slide" isAdmin/>
+                    <DishListItem className="keen-slider__slide" isAdmin/>
+                    <DishListItem className="keen-slider__slide" isAdmin/>
+                    <DishListItem className="keen-slider__slide" isAdmin/>
+                    <DishListItem className="keen-slider__slide" isAdmin/>
+                    <DishListItem className="keen-slider__slide" isAdmin/>
                 </Carousel>
                 {loaded && instanceRef.current && (
                     <>

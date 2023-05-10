@@ -3,7 +3,7 @@ import { Container } from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     text: string,
-    Icon?: React.ElementType,
+    Icon?: React.ElementType | null,
     loading?: boolean
 }
 

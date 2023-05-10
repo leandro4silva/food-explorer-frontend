@@ -66,7 +66,7 @@ export const Item = styled.div`
     -webkit-user-select: none;
     -ms-user-select: none;
 
-    > .favorite{
+    > button{
         position: absolute;
         right: 1.6rem;
         top: 1.6rem;

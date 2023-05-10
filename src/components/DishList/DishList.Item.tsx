@@ -1,16 +1,25 @@
 import { HTMLAttributes, HtmlHTMLAttributes } from "react"
-import {HeartStraight, Minus, Plus} from '@phosphor-icons/react'
+import {HeartStraight, Minus, Plus, PencilSimple} from '@phosphor-icons/react'
 import { Item } from './styles'
 import ParmaToast from '../../assets/images/Dishes/parma-toast.png';
 
-interface DishListItemProps extends HtmlHTMLAttributes<HTMLDivElement>{}
+interface DishListItemProps extends HtmlHTMLAttributes<HTMLDivElement>{
+    isAdmin?: boolean
+}
 
-export function DishListItem({ ...rest}: DishListItemProps) {
+export function DishListItem({isAdmin = false, ...rest}: DishListItemProps) {
     return (
         <Item {...rest}>
-            <button className="favorite">
-                <HeartStraight size={32} />
-            </button>
+                {
+                    isAdmin ?
+                        <button className="editar" title="Editar">
+                            <PencilSimple size={32} />
+                        </button>
+                    : 
+                        <button className="favoritar" title="Favoritar">
+                            <HeartStraight size={32} />
+                        </button>
+                }
             <div className='image'>
                 <img src={ParmaToast} alt="Torrada de parma"/>
             </div>
@@ -23,20 +32,24 @@ export function DishListItem({ ...rest}: DishListItemProps) {
             <div className='price'>
                 <h3>R$ 25,97</h3>
             </div>
-            <div className='itembox'>
-                <div className='amount'>
-                    <button>
-                        <Minus size={24} />
-                    </button>
-                    <span>01</span>
-                    <button>
-                        <Plus size={24}/>
+            {
+                !isAdmin &&
+
+                <div className='itembox'>
+                    <div className='amount'>
+                        <button>
+                            <Minus size={24} />
+                        </button>
+                        <span>01</span>
+                        <button>
+                            <Plus size={24}/>
+                        </button>
+                    </div>
+                    <button className='add-to-cart'>
+                        incluir
                     </button>
                 </div>
-                <button className='add-to-cart'>
-                    incluir
-                </button>
-            </div>
+            }
         </Item>
     )
 }
