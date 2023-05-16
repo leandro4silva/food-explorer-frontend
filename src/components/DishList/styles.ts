@@ -82,8 +82,8 @@ export const Item = styled.div`
         padding-inline: 4rem;
 
         img{
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 17.6rem;
+            max-height: 17.6rem;
             -webkit-user-drag: none;
             user-select: none;
             -moz-user-select: none;
@@ -96,7 +96,7 @@ export const Item = styled.div`
         text-align: center;
         margin-bottom: 1.6rem;
         
-        > h3{
+        > a{
             font: 700 2.4rem 'Poppins',sans-serif;
             line-height: 3.3rem;
             color: ${({ theme }) => theme.COLORS.TEXT_GRAY_700};

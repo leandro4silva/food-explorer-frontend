@@ -26,7 +26,7 @@ export function SignInAdmin(){
         });
 
         if(!error){
-            navigate('/');
+            navigate('/admin/dashboard');
         }
 
         if (error?.type == 'auth') {

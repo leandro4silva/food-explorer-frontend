@@ -13,7 +13,7 @@ export function Home() {
                     <Banner />
                 </BannerContent>
                 <ProductList>
-                    <DishList />
+                    <DishList title="Refeição" isAdmin={false} />
                 </ProductList>
             </Content>
             <Footer />

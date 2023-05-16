@@ -38,14 +38,14 @@ export function SignIn() {
 
     useEffect(() => {
         let hasError = false;
-        
+
         Object.keys(errors).map((error) => {
-            if(error){
+            if (error) {
                 hasError = true
             }
         })
 
-        if(hasError){
+        if (hasError) {
             toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.');
         }
     }, [errors]);

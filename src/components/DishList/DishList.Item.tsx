@@ -2,12 +2,16 @@ import { HTMLAttributes, HtmlHTMLAttributes } from "react"
 import {HeartStraight, Minus, Plus, PencilSimple} from '@phosphor-icons/react'
 import { Item } from './styles'
 import ParmaToast from '../../assets/images/Dishes/parma-toast.png';
+import {useNavigate, Link} from 'react-router-dom'
 
 interface DishListItemProps extends HtmlHTMLAttributes<HTMLDivElement>{
     isAdmin?: boolean
 }
 
 export function DishListItem({isAdmin = false, ...rest}: DishListItemProps) {
+    
+    const navigate = useNavigate();
+    
     return (
         <Item {...rest}>
                 {
@@ -24,7 +28,7 @@ export function DishListItem({isAdmin = false, ...rest}: DishListItemProps) {
                 <img src={ParmaToast} alt="Torrada de parma"/>
             </div>
             <div className='title'>
-                <h3>Torradas de Parma <span>&gt;</span></h3>
+                <Link to={"/admin/details/12"}>Torradas de Parma <span>&gt;</span></Link>
             </div>
             <div className='ingredients'>
                 <p>Presunto de parma e rúcula em um pão com fermentação natural.</p>
