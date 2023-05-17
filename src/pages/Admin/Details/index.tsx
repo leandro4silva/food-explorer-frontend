@@ -12,11 +12,15 @@ export function Details(){
         navigate("/admin/edit/12")
     }
 
+    function handleBack(){
+        navigate(-1);
+    }
+
     return(
         <Container>
             <Header isAdmin />
             <Content>
-                <Back to={"/admin/dashboard"}>
+                <Back onClick={handleBack}>
                     <CaretLeft size={32} /> voltar
                 </Back>  
                 <div className="detail-content">

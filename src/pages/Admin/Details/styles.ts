@@ -63,10 +63,12 @@ export const Content = styled.div`
     }
 `
 
-export const Back = styled(Link)`
+export const Back = styled.button`
     display: inline-flex;
     align-items: center;
     font: 700 2.4rem 'Poppins', sans-serif;
     color: ${({theme}) => theme.COLORS.TEXT_GRAY_700};
     line-height: 3.3rem;
+    background-color: transparent;
+    border: none;
 `
