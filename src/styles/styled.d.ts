@@ -21,12 +21,12 @@ declare module 'styled-components' {
             ERROR_COLOR: string,
             
             TEXT_WHITE: string,
-            TEXT_GRAY_200: String,
+            TEXT_GRAY_200: string,
             TEXT_GRAY_700: string,
             TEXT_GRAY_800: string,
             TEXT_GRAY_900: string,
 
-            TEXT_BLUE: string
+            TEXT_BLUE: string,
         }
     }
 }

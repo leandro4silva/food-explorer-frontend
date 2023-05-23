@@ -25,7 +25,6 @@ export const Container = styled.div`
             background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
             border: none;
             border-radius: 0.4rem;    
-                
         
             > input{
                 width: 100%;

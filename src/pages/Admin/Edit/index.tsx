@@ -3,6 +3,7 @@ import { Header } from "../../../components/Header";
 import {CaretLeft} from '@phosphor-icons/react';
 import { Footer } from "../../../components/Footer";
 import { Input } from "../../../components/Input";
+import { IngredientsItem } from "../../../components/IngredientsItem";
 import { useNavigate } from "react-router-dom";
 
 export function Edit(){
@@ -24,13 +25,27 @@ export function Edit(){
                     <h2>Editar prato</h2>
                     <div className="three-input-group">
                         <div>
-                            <Input label="Nome" />
+                            <Input label="Imagem do prato" />
                         </div>
                         <div>
                             <Input label="Nome" />
                         </div>
                         <div>
-                            <Input label="Nome"/>
+                            <Input label="Categoria"/>
+                        </div>
+                    </div>
+                    <div className="two-input-group">
+                        <div className="ingredients">
+                            <label>Ingredientes</label>
+                            <div>
+                                <IngredientsItem isNew={false}/>
+                                <IngredientsItem isNew />
+                                <IngredientsItem isNew />
+
+                            </div>                           
+                        </div>
+                        <div>
+                            <Input label="Preço" />
                         </div>
                     </div>
                 </Form>
