@@ -4,6 +4,8 @@ import {CaretLeft} from '@phosphor-icons/react';
 import { Footer } from "../../../components/Footer";
 import { Input } from "../../../components/Input";
 import { IngredientsItem } from "../../../components/IngredientsItem";
+import { Textarea } from "../../../components/Textarea";
+import { Button } from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 export function Edit(){
@@ -28,7 +30,7 @@ export function Edit(){
                             <Input label="Imagem do prato" />
                         </div>
                         <div>
-                            <Input label="Nome" />
+                            <Input label="Nome" placeholder="Ex.: Salada Ceasar" />
                         </div>
                         <div>
                             <Input label="Categoria"/>
@@ -39,18 +41,29 @@ export function Edit(){
                             <label>Ingredientes</label>
                             <div>
                                 <IngredientsItem isNew={false}/>
+                                <IngredientsItem isNew={false}/>
+                                <IngredientsItem isNew={false}/>
+                                <IngredientsItem isNew={false}/>
+                                <IngredientsItem isNew={false}/>
+                                <IngredientsItem isNew={false}/>
                                 <IngredientsItem isNew />
-                                <IngredientsItem isNew />
-
                             </div>                           
                         </div>
                         <div>
                             <Input label="Preço" />
                         </div>
                     </div>
+                    <div className="description">
+                        <Textarea label="Descrição"/>
+                    </div>
+                    <div className="button-save-content">
+                        <div>
+                            <Button text="Salvar alteração" light={true}/>
+                        </div>
+                    </div>
                 </Form>
             </Content>
-            
+            <Footer />
         </Container>
     )
 }

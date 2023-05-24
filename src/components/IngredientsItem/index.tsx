@@ -12,7 +12,7 @@ export function IngredientsItem({isNew, ...rest}: IngredientsItemProp){
                 isNew ? 
                     <Input 
                         type="text" 
-                        placeholder={isNew ? "Novo Marcador" : ''}
+                        placeholder={isNew ? "Adicionar" : ''}
                         readOnly={!isNew}
                         {...rest}
                     />
@@ -24,6 +24,7 @@ export function IngredientsItem({isNew, ...rest}: IngredientsItemProp){
             <Button 
                 type="button"
                 title={isNew ? "Adicionar" : "Remover"}
+                isNew={isNew}
             >
                 { isNew ? <Plus size={14}/> : <X size={14}/> }
             </Button>

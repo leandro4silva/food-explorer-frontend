@@ -9,6 +9,7 @@ export const Container = styled.main`
 export const Content = styled.div`
     padding-inline: 12.3rem;
     margin-top: 2.5rem;
+    margin-bottom: 11.6rem;
 `;
 
 export const Back = styled.button`
@@ -40,9 +41,9 @@ export const Form = styled.form`
 
     .two-input-group{
         display: grid;
-        grid-template-columns: 76% auto;
-        column-gap: 3.2rem;
-        align-items: center;    
+        grid-template-columns: 72.7% auto;
+        align-items: center;
+        column-gap: 3.2rem; 
         margin-top: 3.2rem;
     }
 
@@ -57,12 +58,28 @@ export const Form = styled.form`
 
         > div{
             display: flex;
+            flex-wrap: wrap;
             gap: 1.6rem;
             align-items: center;
             padding: 0.8rem;
             background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
             margin-top: 0.8rem;
             border-radius: 0.4rem;
+        }
+    }
+
+    .description{
+        margin-top: 3.2rem;
+    }
+
+    .button-save-content{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 3.2rem;
+
+        > div{
+            width: 17.2rem;
         }
     }
 `

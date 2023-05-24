@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 interface ButtonProps{
-    hasIcon: boolean
+    hasIcon: boolean;
+    light?: boolean
 }
 
 export const Container = styled.button<ButtonProps>`
-    background-color: ${({theme}) => theme.COLORS.BACKGROUND_RED_900};
+    background-color: ${({theme, light}) => light ? theme.COLORS.BACKGROUND_RED_700 : theme.COLORS.BACKGROUND_RED_900};
     border-radius: 0.4rem;
     display: flex;
     justify-content: center;
