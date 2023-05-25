@@ -21,12 +21,17 @@ export const TextareaContent = styled.textarea`
     min-height: 17.2rem;
     min-width: 100%;
     max-width: 100%;
-    color: ${({ theme }) => theme.COLORS.TEXT_WHITE };
+    color: ${({ theme }) => theme.COLORS.TEXT_WHITE};
     font-size: 1.6rem;
     line-height: 1.6rem;
     padding: 1.4rem;
     resize: none;
 
+    &::placeholder{
+        font: 400 1.6rem 'Roboto',sans-serif;
+        line-height: 1.6rem;
+        color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
+    }
 
     &:focus{
         border: 1px solid ${({ theme }) => theme.COLORS.TEXT_GRAY_700};

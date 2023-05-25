@@ -3,6 +3,7 @@ import { Header } from "../../../components/Header";
 import {CaretLeft} from '@phosphor-icons/react';
 import { Footer } from "../../../components/Footer";
 import { Input } from "../../../components/Input";
+import { Select } from "../../../components/Select";
 import { IngredientsItem } from "../../../components/IngredientsItem";
 import { Textarea } from "../../../components/Textarea";
 import { Button } from "../../../components/Button";
@@ -33,7 +34,12 @@ export function Edit(){
                             <Input label="Nome" placeholder="Ex.: Salada Ceasar" />
                         </div>
                         <div>
-                            <Input label="Categoria"/>
+                            <Select label="Categoria">
+                                <option value="">yao</option>
+                                <option value="">yao</option>
+                                <option value="">yao</option>
+                                <option value="">yao</option>
+                            </Select>
                         </div>
                     </div>
                     <div className="two-input-group">
@@ -54,7 +60,7 @@ export function Edit(){
                         </div>
                     </div>
                     <div className="description">
-                        <Textarea label="Descrição"/>
+                        <Textarea label="Descrição" placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"/>
                     </div>
                     <div className="button-save-content">
                         <div>

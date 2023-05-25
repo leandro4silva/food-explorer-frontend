@@ -1,14 +1,15 @@
+import { TextareaHTMLAttributes } from "react"
 import { Container, Label, TextareaContent } from "./styles"
 
-interface TextareaProps {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{
     label?: string
 }
 
-export function Textarea({ label }: TextareaProps){
+export function Textarea({ label, ...rest }: TextareaProps){
     return(
         <Container>
             <Label>{label}</Label>
-            <TextareaContent placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"></TextareaContent>
+            <TextareaContent {...rest}></TextareaContent>
         </Container>
     )
 }
