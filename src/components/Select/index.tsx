@@ -1,21 +1,28 @@
 import { SelectHTMLAttributes } from 'react';
-import { Container, Label, Trigger, Viewport, Item, Separator, Value } from "./styles";
+import { Container, Label, Trigger, Viewport, Item, Separator, Value, Content } from "./styles";
 import * as SelectContent from '@radix-ui/react-select';
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDown, Check } from '@phosphor-icons/react';
 
+interface OptionsProps{
+    value: string,
+    text: string
+}
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     label?: string,
+    options: Array<OptionsProps>,
+    placeholder: string,
+    name: string,
     children?: React.ReactNode
 }
 
-export function Select({ label, children, ...rest }: SelectProps) {
+export function Select({ label, children, name, placeholder, options, ...rest }: SelectProps) {
     return (
         <Container>
             <Label>{label}</Label>
-            <SelectContent.Root name='game'>
+            <SelectContent.Root name={name}>
                 <Trigger>
-                    <Value placeholder='Selecione a categoria do prato' />
+                    <Value placeholder={placeholder} />
 
                     <SelectContent.Icon>
                         <CaretDown size={24} />
@@ -23,25 +30,19 @@ export function Select({ label, children, ...rest }: SelectProps) {
 
                 </Trigger>
                 <SelectContent.Portal>
-
-                    <SelectContent.Content>
-                        <Viewport className='bg-zinc-900 py-3 px-4 text-white rounded '>
-
-                            <Item value="teste">
-                                <SelectContent.ItemText>teste</SelectContent.ItemText>
-                                <SelectContent.ItemIndicator />
-                            </Item>
-
-                            <Separator />
-
-                            <Item value="teste1" className='cursor-pointer'>
-                                <SelectContent.ItemText>teste1</SelectContent.ItemText>
-                                <SelectContent.ItemIndicator />
-                            </Item>
-
-
+                    <Content position='popper' sideOffset={5}>
+                        <Viewport>
+                            {
+                                options.map((option) => {
+                                    return(
+                                        <Item value={option.value}>
+                                            <SelectContent.ItemText>{option.text}</SelectContent.ItemText>
+                                        </Item>
+                                    )
+                                })
+                            }
                         </Viewport>
-                    </SelectContent.Content>
+                    </Content>
                 </SelectContent.Portal>
             </SelectContent.Root>
         </Container>

@@ -16,6 +16,12 @@ export function Edit(){
         navigate(-1);
     }
 
+    const category = [
+        {text: 'Refeição', value: 'refeicao'},
+        {text: 'Sobremesas ', value: 'sobremesas'},
+        {text: 'Bebidas', value: 'bebidas'},
+    ]
+
     return(
         <Container>
             <Header isAdmin/>
@@ -31,15 +37,10 @@ export function Edit(){
                             <Input label="Imagem do prato" />
                         </div>
                         <div>
-                            <Input label="Nome" placeholder="Ex.: Salada Ceasar" />
+                            <Input label="Nome" name="name" placeholder="Ex.: Salada Ceasar" />
                         </div>
                         <div>
-                            <Select label="Categoria">
-                                <option value="">yao</option>
-                                <option value="">yao</option>
-                                <option value="">yao</option>
-                                <option value="">yao</option>
-                            </Select>
+                            <Select label="Categoria" name="category" options={category} placeholder="Selecione a categoria do prato"/>
                         </div>
                     </div>
                     <div className="two-input-group">
@@ -60,11 +61,11 @@ export function Edit(){
                         </div>
                     </div>
                     <div className="description">
-                        <Textarea label="Descrição" placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"/>
+                        <Textarea label="Descrição" name="description" placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"/>
                     </div>
                     <div className="button-save-content">
                         <div>
-                            <Button text="Salvar alteração" light={true}/>
+                            <Button text="Salvar alteração" type="button" light={true}/>
                         </div>
                     </div>
                 </Form>

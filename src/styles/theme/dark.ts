@@ -11,7 +11,7 @@ export default {
 		BACKGROUND_DARK: '#192227',
 
 		BACKGROUND_GRAY: 'rgba(255, 255, 255, 0.3)',
-		
+
 		BACKGROUND_RED_900: '#92000E',
 		BACKGROUND_RED_800: '#750310',
 		BACKGROUND_RED_700: '#AB4D55',
@@ -24,6 +24,6 @@ export default {
 		TEXT_GRAY_800: '#C4C4CC',
 		TEXT_GRAY_900: '#7C7C8A',
 
-		TEXT_BLUE: '#82F3FF'
+		TEXT_BLUE: '#82F3FF',
 	}
 };               
