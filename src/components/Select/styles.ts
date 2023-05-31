@@ -51,23 +51,6 @@ export const Viewport = styled(SelectContent.Viewport)`
     overflow: hidden;
 `
 
-export const Item = styled(SelectContent.Item)`
-    cursor: pointer;
-    height: 5.1rem;
-    padding-inline: 1.6rem;
-    padding-block: 1.3rem;
-    outline: none;
-    border: none;
-    border-radius: 0.4rem;
-    display: flex;
-    align-items: center;
-    font-size: 400 1.6rem 'Poppins',sans-serif;
-    
-    &:hover{
-        border: 1px solid ${({theme}) => theme.COLORS.TEXT_GRAY_700};
-        background-color: ${({theme}) => theme.COLORS.BACKGROUND_900};
-    }
-`
 
 export const Separator = styled(SelectContent.Separator)`
     height: 1px;

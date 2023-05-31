@@ -9,7 +9,7 @@ export function Details(){
     const navigate = useNavigate();
 
     function handleEditDish(){
-        navigate("/admin/edit/12")
+        navigate("/admin/dish/edit/12")
     }
 
     function handleBack(){

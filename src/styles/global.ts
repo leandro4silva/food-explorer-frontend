@@ -17,8 +17,8 @@ export default createGlobalStyle`
 
     body{
         font-size: 1.6rem;
-        background: ${({theme}) => theme.COLORS.BACKGROUND_800};
-        color: ${({theme}) => theme.COLORS.TEXT_WHITE};
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_800};
+        color: ${({ theme }) => theme.COLORS.TEXT_WHITE};
         -webkit-font-smoothing: antialiased;
     }
 
@@ -46,5 +46,24 @@ export default createGlobalStyle`
     button:hover,
     a:hover{
         filter: brightness(0.9);
+    }
+
+
+    .select-item{
+        cursor: pointer;
+        height: 5.1rem;
+        padding-inline: 1.6rem;
+        padding-block: 1.3rem;
+        outline: none;
+        border: none;
+        border-radius: 0.4rem;
+        display: flex;
+        align-items: center;
+        font-size: 400 1.6rem 'Poppins',sans-serif;
+        
+        &:hover{
+            border: 1px solid ${({ theme }) => theme.COLORS.TEXT_GRAY_700};
+            background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+        }
     }
 `

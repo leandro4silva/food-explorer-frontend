@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 
 export function Button({Icon, text, loading = false, light, ...rest }:ButtonProps){
     return(
-        <Container hasIcon={Icon ? true : false} light={light}>
+        <Container hasIcon={Icon ? true : false} light={light} {...rest}>
             {
                 loading ? 
                     'Carregando...'

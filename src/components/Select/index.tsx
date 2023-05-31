@@ -3,20 +3,15 @@ import { Container, Label, Trigger, Viewport, Item, Separator, Value, Content } 
 import * as SelectContent from '@radix-ui/react-select';
 import { CaretDown, Check } from '@phosphor-icons/react';
 
-interface OptionsProps{
-    value: string,
-    text: string
-}
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     label?: string,
-    options: Array<OptionsProps>,
     placeholder: string,
     name: string,
     children?: React.ReactNode
 }
 
-export function Select({ label, children, name, placeholder, options, ...rest }: SelectProps) {
+export function Select({ label, children, name, placeholder, ...rest }: SelectProps) {
     return (
         <Container>
             <Label>{label}</Label>
@@ -30,16 +25,10 @@ export function Select({ label, children, name, placeholder, options, ...rest }:
 
                 </Trigger>
                 <SelectContent.Portal>
-                    <Content position='popper' sideOffset={5}>
+                    <Content position='popper' sideOffset={2}>
                         <Viewport>
                             {
-                                options.map((option) => {
-                                    return(
-                                        <Item value={option.value}>
-                                            <SelectContent.ItemText>{option.text}</SelectContent.ItemText>
-                                        </Item>
-                                    )
-                                })
+                                children
                             }
                         </Viewport>
                     </Content>

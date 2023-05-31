@@ -2,7 +2,7 @@ import { HTMLAttributes, HtmlHTMLAttributes } from "react"
 import {HeartStraight, Minus, Plus, PencilSimple} from '@phosphor-icons/react'
 import { Item } from './styles'
 import ParmaToast from '../../assets/images/Dishes/parma-toast.png';
-import {useNavigate, Link} from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 interface DishListItemProps extends HtmlHTMLAttributes<HTMLDivElement>{
     isAdmin?: boolean
@@ -11,12 +11,16 @@ interface DishListItemProps extends HtmlHTMLAttributes<HTMLDivElement>{
 export function DishListItem({isAdmin = false, ...rest}: DishListItemProps) {
     
     const navigate = useNavigate();
-    
+
+    function handleEditDish(){
+        navigate("/admin/dish/edit/12");
+    }
+
     return (
         <Item {...rest}>
                 {
                     isAdmin ?
-                        <button className="editar" title="Editar">
+                        <button className="editar" title="Editar" onClick={handleEditDish}>
                             <PencilSimple size={32} />
                         </button>
                     : 

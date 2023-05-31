@@ -7,9 +7,10 @@ import { Select } from "../../../components/Select";
 import { IngredientsItem } from "../../../components/IngredientsItem";
 import { Textarea } from "../../../components/Textarea";
 import { Button } from "../../../components/Button";
+import { FileInput } from "../../../components/FileInput";
 import { useNavigate } from "react-router-dom";
 
-export function Edit(){
+export function EditDish(){
     const navigate = useNavigate();
 
     function handleBack(){
@@ -34,7 +35,7 @@ export function Edit(){
                     <h2>Editar prato</h2>
                     <div className="three-input-group">
                         <div>
-                            <Input label="Imagem do prato" />
+                            <FileInput />
                         </div>
                         <div>
                             <Input label="Nome" name="name" placeholder="Ex.: Salada Ceasar" />
@@ -48,16 +49,11 @@ export function Edit(){
                             <label>Ingredientes</label>
                             <div>
                                 <IngredientsItem isNew={false}/>
-                                <IngredientsItem isNew={false}/>
-                                <IngredientsItem isNew={false}/>
-                                <IngredientsItem isNew={false}/>
-                                <IngredientsItem isNew={false}/>
-                                <IngredientsItem isNew={false}/>
-                                <IngredientsItem isNew />
+                                <IngredientsItem isNew/>
                             </div>                           
                         </div>
                         <div>
-                            <Input label="Preço" />
+                            <Input label="Preço" placeholder="R$ 00,00" />
                         </div>
                     </div>
                     <div className="description">

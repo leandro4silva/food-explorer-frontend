@@ -25,6 +25,10 @@ export function Header({isAdmin = false} : HeaderProps) {
         }
     }
 
+    function handleCreateDish(){
+        navigate("/admin/dish/create");
+    }
+
     return (
         <Container>
             <Nav>
@@ -60,7 +64,14 @@ export function Header({isAdmin = false} : HeaderProps) {
                         <Input Icon={FiSearch} placeholder="Busque pelas opções de pratos" />
                     </NavItem>
                     <NavItem>
-                        <Button Icon={!isAdmin ? Receipt : null} text={ !isAdmin ? "Meu pedido (0)" : "Novo prato"} />
+                        {
+                            isAdmin && 
+                            <Button text="Novo prato" type="button" onClick={handleCreateDish} />
+                        }
+                        {
+                            !isAdmin &&
+                            <Button Icon={Receipt} text="Meu pedido (0)" />
+                        }
                     </NavItem>
                     <NavItem>
                         <SignOutButton type="button" title="Sair" onClick={handleSignOut}>
