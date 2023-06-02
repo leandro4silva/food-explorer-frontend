@@ -44,5 +44,8 @@ export const Label = styled.label`
     line-height: 2.4rem;
     width: 100%;
     height: 5.1rem;
+    padding-inline: 2rem;
+    padding-block: 0.5rem;
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+
 `

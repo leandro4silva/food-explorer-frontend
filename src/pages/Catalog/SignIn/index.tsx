@@ -30,9 +30,15 @@ export function SignIn() {
         if (error?.type == 'auth') {
             setError('email', { type: 'custom', message: error.message });
             setError('password', { type: 'custom', message: error.message });
-            toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.');
+            toastAlert({
+                message: 'Alguns campos estão incorretos. Corrija os campos em vermelho.',
+                type: 'error'
+            });
         } else {
-            toastAlert('Error ao tentar realizar o login, contate o administrador');
+            toastAlert({
+                message: 'Error ao tentar realizar o login, contate o administrador',
+                type: 'error'
+            });
         }
     }
 
@@ -46,7 +52,10 @@ export function SignIn() {
         })
 
         if (hasError) {
-            toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.');
+            toastAlert({
+                message: 'Alguns campos estão incorretos. Corrija os campos em vermelho.',
+                type: 'error'
+            });
         }
     }, [errors]);
 

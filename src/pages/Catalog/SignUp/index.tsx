@@ -36,9 +36,15 @@ export function SignUp() {
         } catch (error: any) {
             if (error.response && error.response.data.type == 'email') {
                 setError('email', { type: 'custom', message: error.response.data.message })
-                toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.');
+                toastAlert({
+                    message: 'Alguns campos estão incorretos. Corrija os campos em vermelho.',
+                    type: 'error'
+                });
             } else {
-                toastAlert('Não foi possivel realizar o cadastro, tente novamente mais tarde')
+                toastAlert({
+                    message: 'Não foi possivel realizar o cadastro, tente novamente mais tarde',
+                    type: 'error'
+                })
             }
         }
     }
@@ -53,7 +59,10 @@ export function SignUp() {
         })
 
         if (hasError) {
-            toastAlert('Alguns campos estão incorretos. Corrija os campos em vermelho.');
+            toastAlert({
+                message: 'Alguns campos estão incorretos. Corrija os campos em vermelho.',
+                type: 'error'
+            });
         }
     }, [errors]);
 

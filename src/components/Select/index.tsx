@@ -1,5 +1,5 @@
 import { SelectHTMLAttributes } from 'react';
-import { Container, Label, Trigger, Viewport, Item, Separator, Value, Content } from "./styles";
+import { Container, Label, Trigger, Viewport, Separator, Value, Content } from "./styles";
 import * as SelectContent from '@radix-ui/react-select';
 import { CaretDown, Check } from '@phosphor-icons/react';
 
@@ -9,6 +9,11 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     placeholder: string,
     name: string,
     children?: React.ReactNode
+}
+
+interface OptionProps{
+    value: string,
+    content: string
 }
 
 export function Select({ label, children, name, placeholder, ...rest }: SelectProps) {
@@ -35,5 +40,13 @@ export function Select({ label, children, name, placeholder, ...rest }: SelectPr
                 </SelectContent.Portal>
             </SelectContent.Root>
         </Container>
+    )
+}
+
+export function Option({content, value}: OptionProps) {
+    return (
+        <SelectContent.Item className="select-item" value={value}>
+            <SelectContent.ItemText>{content}</SelectContent.ItemText>
+        </SelectContent.Item>
     )
 }

@@ -27,7 +27,7 @@ export const Input = styled.input`
     color: ${({ theme }) => theme.COLORS.TEXT_WHITE};
     background-color: transparent;
     border: none;
-    width: 7rem;
+    width: 8rem;
 
 
     &::placeholder{

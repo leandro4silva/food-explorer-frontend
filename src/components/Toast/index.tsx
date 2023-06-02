@@ -2,8 +2,13 @@ import { ToastContainer, toast, CloseButtonProps, IconProps } from 'react-toasti
 import { Warning, X } from '@phosphor-icons/react'
 import "react-toastify/ReactToastify.min.css";
 
+interface toastAlertProps{
+    message: string,
+    type: string
+}
 
-export function toastAlert(message : String) {
+
+export function toastAlert({message, type = 'error'}: toastAlertProps) {
     function closeButton({ closeToast }: CloseButtonProps ){
         return <X size={24} color='#721c24' onClick={() => closeToast} />
     }
@@ -15,20 +20,42 @@ export function toastAlert(message : String) {
         return;
     }
 
-    toast.error(message, {
-        style: {
-            backgroundColor: '#f5c6cb',
-            color: '#721c24',
-            width: '350px',
-            height: '80px',
-            fontSize: '16px'
-        },
-        progressStyle: {
-            backgroundColor: '#721c24'
-        },
-        icon: toastIcon,
-        closeButton: closeButton, 
-    })
+
+
+    if(type == 'error'){
+        toast.error(message, {
+            style: {
+                backgroundColor: '#f5c6cb',
+                color: '#721c24',
+                width: '350px',
+                height: '80px',
+                fontSize: '16px'
+            },
+            progressStyle: {
+                backgroundColor: '#721c24'
+            },
+            icon: toastIcon,
+            closeButton: closeButton, 
+        })
+    }
+
+    if(type == 'alert'){
+        toast.warning(message, {
+            style: {
+                backgroundColor: '#ffeeba',
+                color: '##856404',
+                width: '350px',
+                height: '80px',
+                fontSize: '16px'
+            },
+            progressStyle: {
+                backgroundColor: '##ffeeba'
+            },
+            icon: toastIcon,
+            closeButton: closeButton, 
+        })
+    }
+
 }
 
 export function ToastContent() {

@@ -3,7 +3,7 @@ import { Header } from "../../../components/Header";
 import { CaretLeft } from '@phosphor-icons/react';
 import { Footer } from "../../../components/Footer";
 import { Input } from "../../../components/Input";
-import { Select } from "../../../components/Select";
+import { Select, Option } from "../../../components/Select";
 import { IngredientsItem } from "../../../components/IngredientsItem";
 import { Textarea } from "../../../components/Textarea";
 import { Button } from "../../../components/Button";
@@ -11,8 +11,7 @@ import { FileInput } from "../../../components/FileInput";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../../../services/api";
-import * as SelectContent from '@radix-ui/react-select';
-
+import { ToastContent, toastAlert } from "../../../components/Toast";
 
 interface CategoryProps {
     id: string,
@@ -22,9 +21,40 @@ interface CategoryProps {
 export function CreateDish() {
     const navigate = useNavigate();
     const [categorys, setCategorys] = useState<CategoryProps[]>([]);
+    const [newIngredient, setNewIngredient] = useState('');
+    const [ingredient, setIngredient] = useState<string[]>([]);
+    const [image, setImage] = useState<File>();
 
     function handleBack() {
         navigate(-1);
+    }
+
+    function handleAddIngredients() {
+        if(!newIngredient){
+            return toastAlert({
+                message: 'Preencha o nome do ingrediente antes de adicionar.',
+                type: 'error'
+            });
+        }
+
+        setIngredient(prevState => [...prevState, newIngredient]);
+        setNewIngredient('');
+    }
+
+    function handleAddImage(e: React.FormEvent<HTMLInputElement>){
+        if(e.currentTarget.files){
+            const file = e.currentTarget.files[0]
+            setImage(file)
+
+            
+
+            const imagePreview = URL.createObjectURL(file)
+            //console.log(imagePreview)
+        }
+    }
+
+    function handleRemoveIngredient(deletedIngredient: string){
+        setIngredient(prevState => prevState.filter(ingredient => ingredient != deletedIngredient ? true : false))
     }
 
     useEffect(() => {
@@ -34,7 +64,6 @@ export function CreateDish() {
         }
         fetchCategory();
     }, [])
-
 
     return (
         <Container>
@@ -48,7 +77,7 @@ export function CreateDish() {
                     <h2>Adicionar prato</h2>
                     <div className="three-input-group">
                         <div>
-                            <FileInput />
+                            <FileInput name="image" label={image?.name || "Selecione imagem"} onChange={handleAddImage}/>
                         </div>
                         <div>
                             <Input label="Nome" name="name" placeholder="Ex.: Salada Ceasar" />
@@ -58,9 +87,11 @@ export function CreateDish() {
                                 {
                                     categorys && categorys.map((category) => {
                                         return (
-                                            <SelectContent.Item className="select-item" value={category.id} key={category.id}>
-                                                <SelectContent.ItemText>{category.name}</SelectContent.ItemText>
-                                            </SelectContent.Item>
+                                            <Option
+                                                content={category.name}
+                                                value={category.id}
+                                                key={category.id}
+                                            />
                                         )
                                     })
                                 }
@@ -71,8 +102,19 @@ export function CreateDish() {
                         <div className="ingredients">
                             <label>Ingredientes</label>
                             <div>
-                                <IngredientsItem isNew={false} />
-                                <IngredientsItem isNew />
+                                {
+                                    ingredient.map((item, index) => {
+                                        return (
+                                            <IngredientsItem 
+                                                key={index}
+                                                isNew={false} 
+                                                name={item}
+                                                onClick={() => handleRemoveIngredient(item)} 
+                                            />
+                                        )
+                                    })
+                                }
+                                <IngredientsItem isNew onClick={handleAddIngredients} value={newIngredient} onChange={e => setNewIngredient(e.target.value)} />
                             </div>
                         </div>
                         <div>
@@ -90,6 +132,7 @@ export function CreateDish() {
                 </Form>
             </Content>
             <Footer />
+            <ToastContent />
         </Container>
     )
 }
