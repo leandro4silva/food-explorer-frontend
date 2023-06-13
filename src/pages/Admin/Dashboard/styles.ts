@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.main`
     height: 100vh;
     width: 100%;
+    place-content: center;
 `
 
 export const Content = styled.div`
@@ -18,5 +19,13 @@ export const ProductList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 6.4rem;
+    margin-bottom: 4.8rem;
+`
+
+export const ContentLoader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 10rem;
     margin-bottom: 4.8rem;
 `

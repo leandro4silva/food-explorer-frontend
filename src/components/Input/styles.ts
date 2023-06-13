@@ -35,12 +35,23 @@ export const Container = styled.div`
                 color: ${({ theme }) => theme.COLORS.TEXT_WHITE};
                 font-size: 1.6rem;
                 line-height: 1.6rem;
-            
+                
+
                 &::placeholder{
                     font: 400 1.6rem 'Roboto',sans-serif;
                     line-height: 1.6rem;
                     color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
                 }
+            }
+
+            > input[type="number"]::-webkit-outer-spin-button,
+            > input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            > input[type="number"] {
+                -moz-appearance: textfield;
             }
         
             > svg{

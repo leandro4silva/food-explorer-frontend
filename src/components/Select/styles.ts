@@ -5,15 +5,26 @@ import * as SelectContent from '@radix-ui/react-select';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
     width: 100%;
     overflow: hidden;
+
+    > span.error {
+        color: ${({ theme }) => theme.COLORS.ERROR_COLOR};
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        font: 400 1.4rem 'Roboto',sans-serif;
+        margin-top: 0.2rem;
+    }
+
+    
 `
 
 export const Label = styled.label`
     font: 400 1.6rem 'Roboto',sans-serif;
     line-height: 1.6rem;
     color: ${({ theme }) => theme.COLORS.TEXT_GRAY_800};
+    margin-bottom: 0.8rem;
 `
 
 export const Trigger = styled(SelectContent.Trigger)`
@@ -33,6 +44,10 @@ export const Trigger = styled(SelectContent.Trigger)`
 
     &[data-placeholder]{
         color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};;
+    }
+
+    &.has-error{
+        border: 1px solid ${({ theme }) => theme.COLORS.ERROR_COLOR};
     }
 `
 export const Value = styled(SelectContent.Value)`

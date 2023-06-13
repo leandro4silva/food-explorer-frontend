@@ -3,24 +3,35 @@ import {HeartStraight, Minus, Plus, PencilSimple} from '@phosphor-icons/react'
 import { Item } from './styles'
 import ParmaToast from '../../assets/images/Dishes/parma-toast.png';
 import { useNavigate, Link } from 'react-router-dom'
+import { DishProps } from "../../pages/Admin/Dashboard";
+import { api } from "../../services/api";
+
 
 interface DishListItemProps extends HtmlHTMLAttributes<HTMLDivElement>{
-    isAdmin?: boolean
+    isAdmin?: boolean,
+    dish: DishProps
 }
 
-export function DishListItem({isAdmin = false, ...rest}: DishListItemProps) {
+export function DishListItem({isAdmin = false, dish, ...rest}: DishListItemProps) {
     
     const navigate = useNavigate();
+  
+    function handleEditDish(id: string){
+        navigate(`/admin/dish/edit/${id}`);
+    }
 
-    function handleEditDish(){
-        navigate("/admin/dish/edit/12");
+    function handleText(text: string, maxSize: number){
+        if(text.length > maxSize){
+            return text.slice(0, maxSize) + "..."
+        }
+        return text;
     }
 
     return (
-        <Item {...rest}>
+        <Item isAdmin={isAdmin} {...rest}>
                 {
                     isAdmin ?
-                        <button className="editar" title="Editar" onClick={handleEditDish}>
+                        <button className="editar" title="Editar" onClick={() => handleEditDish(dish.id)}>
                             <PencilSimple size={32} />
                         </button>
                     : 
@@ -29,16 +40,18 @@ export function DishListItem({isAdmin = false, ...rest}: DishListItemProps) {
                         </button>
                 }
             <div className='image'>
-                <img src={ParmaToast} alt="Torrada de parma"/>
+                <Link to={`/admin/details/${dish.id}`}>
+                    <img src={`${api.defaults.baseURL}/files/${dish.image}`} alt="Torrada de parma"/>
+                </Link>
             </div>
             <div className='title'>
-                <Link to={"/admin/details/12"}>Torradas de Parma <span>&gt;</span></Link>
+                <Link to={`/admin/details/${dish.id}`}>{dish.name} <span>&gt;</span></Link>
             </div>
-            <div className='ingredients'>
-                <p>Presunto de parma e rúcula em um pão com fermentação natural.</p>
+            <div className='description' title={dish.description}>
+                <p>{handleText(dish.description, 66)}</p>
             </div>
             <div className='price'>
-                <h3>R$ 25,97</h3>
+                <h3>{dish.price}</h3>
             </div>
             {
                 !isAdmin &&

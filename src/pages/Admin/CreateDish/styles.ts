@@ -35,25 +35,27 @@ export const Form = styled.form`
     .three-input-group{
         display: grid;
         grid-template-columns: auto 40% 30%;
-        align-items: center;
+        align-items: flex-start;
         column-gap: 3.2rem;
     }
 
     .two-input-group{
         display: grid;
         grid-template-columns: 72.7% auto;
-        align-items: center;
+        align-items: flex-start;
         column-gap: 3.2rem; 
         margin-top: 3.2rem;
     }
 
     .two-input-group > .ingredients{
-        height: 100%;
+        display: flex;
+        flex-direction: column;
 
         > label {
             font: 400 1.6rem 'Roboto',sans-serif;
             line-height: 1.6rem;
             color: ${({ theme }) => theme.COLORS.TEXT_GRAY_800};
+            margin-bottom: 0.8rem;
         }
 
         > div{
@@ -61,10 +63,18 @@ export const Form = styled.form`
             flex-wrap: wrap;
             gap: 1.6rem;
             align-items: center;
-            padding: 0.8rem;
+            padding: 0.7rem;
             background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
-            margin-top: 0.8rem;
             border-radius: 0.4rem;
+        }
+
+        > span {
+            color: ${({ theme }) => theme.COLORS.ERROR_COLOR};
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            font: 400 1.4rem 'Roboto',sans-serif;
+            margin-top: 0.2rem;
         }
     }
 

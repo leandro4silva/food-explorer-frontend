@@ -68,6 +68,7 @@ export function SignInAdmin(){
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <Input 
                         placeholder="Exemplo: admin@admin.com" 
+                        name="email"
                         type="email"
                         label="Usuário" 
                         register={register("email")} 
@@ -75,6 +76,7 @@ export function SignInAdmin(){
                     />
                     <Input 
                         placeholder="No minimo 6 caracteres" 
+                        name="password"
                         type="password"
                         label="Senha" 
                         register={register("password")}

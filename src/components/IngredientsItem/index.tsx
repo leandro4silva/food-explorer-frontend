@@ -1,29 +1,30 @@
 import { InputHTMLAttributes } from "react"
 import { Container, Input, Button, Span } from "./styles"
 import { Plus, X } from '@phosphor-icons/react'
+import { FieldValues } from "react-hook-form"
 
 
 interface IngredientItemProp extends InputHTMLAttributes<HTMLInputElement>{
     isNew: boolean,
-    name?: string,
+    text?: string,
+    register?: FieldValues,
     onClick: () => void,
 }
 
-export function IngredientsItem({ isNew, onClick, name, ...rest }: IngredientItemProp) {
+export function IngredientsItem({ isNew, onClick, text, register, ...rest }: IngredientItemProp) {
     return (
-        <Container isNew={isNew}>
+        <Container isNew={isNew} {...register}>
             {
                 isNew ?
                     <Input
                         type="text"
-                        name="ingredient"
                         placeholder={isNew ? "Adicionar" : ''}
                         readOnly={!isNew}
                         {...rest}
                     />
                     :
                     <Span>
-                        {name}
+                        {text}
                     </Span>
             }
             <Button

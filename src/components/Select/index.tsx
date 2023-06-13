@@ -1,14 +1,18 @@
-import { SelectHTMLAttributes } from 'react';
+import { SelectHTMLAttributes, useState } from 'react';
 import { Container, Label, Trigger, Viewport, Separator, Value, Content } from "./styles";
 import * as SelectContent from '@radix-ui/react-select';
-import { CaretDown, Check } from '@phosphor-icons/react';
+import { CaretDown, Check, WarningCircle } from '@phosphor-icons/react';
+import { FieldValues } from 'react-hook-form';
 
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps{
     label?: string,
     placeholder: string,
     name: string,
-    children?: React.ReactNode
+    register?: FieldValues,
+    error?: string,
+    children?: React.ReactNode,
+    onChange: (value: string) => void
 }
 
 interface OptionProps{
@@ -16,12 +20,14 @@ interface OptionProps{
     content: string
 }
 
-export function Select({ label, children, name, placeholder, ...rest }: SelectProps) {
+
+export function Select({ label, children, name, placeholder, error, register, onChange, ...rest }: SelectProps) {
+
     return (
-        <Container>
+        <Container {...register}>
             <Label>{label}</Label>
-            <SelectContent.Root name={name}>
-                <Trigger>
+            <SelectContent.Root name={name} onValueChange={(value) => onChange(value)}>
+                <Trigger className={error ? 'has-error' : ''}>
                     <Value placeholder={placeholder} />
 
                     <SelectContent.Icon>
@@ -39,6 +45,11 @@ export function Select({ label, children, name, placeholder, ...rest }: SelectPr
                     </Content>
                 </SelectContent.Portal>
             </SelectContent.Root>
+            {
+                error ?
+                    <span className="error"> <WarningCircle size={18} /> {error}</span>
+                    : null
+            }
         </Container>
     )
 }

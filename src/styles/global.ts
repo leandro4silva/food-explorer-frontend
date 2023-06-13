@@ -48,7 +48,6 @@ export default createGlobalStyle`
         filter: brightness(0.9);
     }
 
-
     .select-item{
         cursor: pointer;
         height: 5.1rem;
@@ -66,4 +65,27 @@ export default createGlobalStyle`
             background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
         }
     }
+
+    /* SCROLL BAR */
+
+    /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: ${({theme}) => theme.COLORS.BACKGROUND_900};
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: ${({theme}) => theme.COLORS.BACKGROUND_500};
+  border-radius: 0.4rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.1);
+}
 `

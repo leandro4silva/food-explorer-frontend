@@ -1,6 +1,6 @@
 import { Container, Content, Back, Form } from "./styles";
 import { Header } from "../../../components/Header";
-import { CaretLeft } from '@phosphor-icons/react';
+import { CaretLeft, WarningCircle } from '@phosphor-icons/react';
 import { Footer } from "../../../components/Footer";
 import { Input } from "../../../components/Input";
 import { Select, Option } from "../../../components/Select";
@@ -9,11 +9,21 @@ import { Textarea } from "../../../components/Textarea";
 import { Button } from "../../../components/Button";
 import { FileInput } from "../../../components/FileInput";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../../services/api";
 import { ToastContent, toastAlert } from "../../../components/Toast";
+import { createDishValidate } from "./validate";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { priceMask } from "../../../utils/masks";
+import { useSession } from "../../../hooks/session";
 
 interface CategoryProps {
+    id: string,
+    name: string
+}
+
+interface IngredientProps {
     id: string,
     name: string
 }
@@ -21,40 +31,88 @@ interface CategoryProps {
 export function CreateDish() {
     const navigate = useNavigate();
     const [categorys, setCategorys] = useState<CategoryProps[]>([]);
+    const [category, setCategory] = useState('');
     const [newIngredient, setNewIngredient] = useState('');
-    const [ingredient, setIngredient] = useState<string[]>([]);
-    const [image, setImage] = useState<File>();
+    const [ingredients, setIngredients] = useState<IngredientProps[]>([]);
+    const [imageFile, setImageFile] = useState<File>();
+    const { setMessageSession, sessionMessage } = useSession();
+
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm({
+        resolver: zodResolver(createDishValidate)
+    });
 
     function handleBack() {
         navigate(-1);
     }
 
     function handleAddIngredients() {
-        if(!newIngredient){
+        if (!newIngredient) {
             return toastAlert({
                 message: 'Preencha o nome do ingrediente antes de adicionar.',
                 type: 'error'
             });
         }
-
-        setIngredient(prevState => [...prevState, newIngredient]);
+        setIngredients(prevState => [...prevState, {
+            id: "",
+            name: newIngredient
+        }]);
         setNewIngredient('');
-    }
 
-    function handleAddImage(e: React.FormEvent<HTMLInputElement>){
-        if(e.currentTarget.files){
-            const file = e.currentTarget.files[0]
-            setImage(file)
-
-            
-
-            const imagePreview = URL.createObjectURL(file)
-            //console.log(imagePreview)
+        if (errors.ingredients) {
+            setError('ingredients', { type: 'custom', message: '' });
         }
     }
 
-    function handleRemoveIngredient(deletedIngredient: string){
-        setIngredient(prevState => prevState.filter(ingredient => ingredient != deletedIngredient ? true : false))
+    function handleAddImage(e: React.FormEvent<HTMLInputElement>) {
+        if (e.currentTarget.files) {
+            const file = e.currentTarget.files[0]
+            setImageFile(file)
+        }
+    }
+
+    function handleRemoveIngredient(deletedIngredient: string) {
+        setIngredients(prevState => prevState.filter(ingredient => ingredient.name != deletedIngredient ? true : false))
+    }
+
+    function handleSelectCategory(value: string){
+        console.log(value)
+        setCategory(value);
+    }
+
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        if (ingredients.length == 0) {
+            setError('ingredients', { type: 'custom', message: 'Selecione um ingrediente' });
+        }
+
+        try {
+            await api.post("/dishs", {
+                image: "",
+                name: data.name,
+                category: data.category,
+                price: data.price,
+                description: data.description,
+                ingredients
+            });
+
+            if (imageFile) {
+                const fileUploadForm = new FormData();
+                fileUploadForm.append("image", imageFile);
+
+                await api.patch(`/dishs/image/${data.name}`, fileUploadForm)
+            }
+
+            setMessageSession({
+                message: `O prato ${data.name} foi adicionado com sucesso!`,
+                type: 'success'
+            })
+
+            navigate("/admin/dashboard");
+        } catch (error: any) {
+            toastAlert({
+                message: 'Não foi possivel realizar o cadastro do prato, tente novamente mais tarde',
+                type: 'error'
+            })
+        }
     }
 
     useEffect(() => {
@@ -73,19 +131,39 @@ export function CreateDish() {
                     <CaretLeft size={32} />
                     voltar
                 </Back>
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
                     <h2>Adicionar prato</h2>
                     <div className="three-input-group">
                         <div>
-                            <FileInput name="image" label={image?.name || "Selecione imagem"} onChange={handleAddImage}/>
+                            <FileInput
+                                name="image"
+                                label={imageFile?.name || "Selecione imagem"}
+                                onChange={handleAddImage}
+                                register={register('image')}
+                                error={errors.image?.message?.toString()}
+                            />
                         </div>
                         <div>
-                            <Input label="Nome" name="name" placeholder="Ex.: Salada Ceasar" />
+                            <Input
+                                label="Nome"
+                                name="name"
+                                type="text"
+                                placeholder="Ex.: Salada Ceasar"
+                                register={register('name')}
+                                error={errors.name?.message?.toString()}
+                            />
                         </div>
                         <div>
-                            <Select label="Categoria" name="category" placeholder="Selecione a categoria do prato">
+                            <Select
+                                label="Categoria"
+                                name="category"
+                                placeholder="Selecione a categoria do prato"
+                                onChange={handleSelectCategory}
+                                register={register('category')}
+                                error={errors.category?.message?.toString()}
+                            >
                                 {
-                                    categorys && categorys.map((category) => {
+                                    categorys && categorys.map((category, index) => {
                                         return (
                                             <Option
                                                 content={category.name}
@@ -103,30 +181,49 @@ export function CreateDish() {
                             <label>Ingredientes</label>
                             <div>
                                 {
-                                    ingredient.map((item, index) => {
+                                    ingredients.map((item, index) => {
                                         return (
-                                            <IngredientsItem 
+                                            <IngredientsItem
                                                 key={index}
-                                                isNew={false} 
-                                                name={item}
-                                                onClick={() => handleRemoveIngredient(item)} 
+                                                isNew={false}
+                                                name="ingredient"
+                                                text={item.name}
+                                                onClick={() => handleRemoveIngredient(item.name)}
                                             />
                                         )
                                     })
                                 }
                                 <IngredientsItem isNew onClick={handleAddIngredients} value={newIngredient} onChange={e => setNewIngredient(e.target.value)} />
                             </div>
+                            {
+                                errors.ingredients?.message ?
+                                    <span> <WarningCircle size={18} /> {errors.ingredients?.message?.toString()}</span>
+                                    : null
+                            }
                         </div>
                         <div>
-                            <Input label="Preço" placeholder="R$ 00,00" />
+                            <Input
+                                label="Preço"
+                                placeholder="R$ 00,00"
+                                name="price"
+                                mask={priceMask}
+                                register={register('price')}
+                                error={errors.price?.message?.toString()}
+                            />
                         </div>
                     </div>
                     <div className="description">
-                        <Textarea label="Descrição" name="description" placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
+                        <Textarea
+                            label="Descrição"
+                            name="description"
+                            register={register('description')}
+                            error={errors.description?.message?.toString()}
+                            placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
+                        />
                     </div>
                     <div className="button-save-content">
                         <div>
-                            <Button text="Salvar alteração" type="button" light={true} />
+                            <Button text="Salvar alteração" type="submit" light={true} loading={isSubmitting} />
                         </div>
                     </div>
                 </Form>

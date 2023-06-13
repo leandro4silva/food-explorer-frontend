@@ -3,15 +3,24 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
     text-align: left;
     width: 100%;
+
+    > span {
+        color: ${({ theme }) => theme.COLORS.ERROR_COLOR};
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        font: 400 1.4rem 'Roboto',sans-serif;
+        margin-top: 0.2rem;
+    }
 `
 
 export const Label = styled.label`
     font: 400 1.6rem 'Roboto',sans-serif;
     line-height: 1.6rem;
     color: ${({ theme }) => theme.COLORS.TEXT_GRAY_800};
+    margin-bottom: 0.8rem;
 `
 
 export const TextareaContent = styled.textarea`
@@ -31,6 +40,17 @@ export const TextareaContent = styled.textarea`
         font: 400 1.6rem 'Roboto',sans-serif;
         line-height: 1.6rem;
         color: ${({ theme }) => theme.COLORS.TEXT_GRAY_900};
+    }
+
+    &.has-error{
+        border: 1px solid ${({ theme }) => theme.COLORS.ERROR_COLOR};
+    }
+
+    &.has-error:focus-within{
+        border: 1px solid ${({ theme }) => theme.COLORS.ERROR_COLOR};    
+        > svg{
+            color: ${({ theme }) => theme.COLORS.ERROR_COLOR};
+        }
     }
 
     &:focus{

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ItemProp{
+    isAdmin: boolean
+}
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -46,26 +50,36 @@ export const Title = styled.h2`
 `
 
 export const Carousel = styled.div`
-    display: grid;
-    grid-template-columns: repeat(5, 1fr) 0.5fr;
-    align-content: center;
+    display: flex;
+    align-items: center;
     width: 100%;
     overflow: hidden;
 `
 
-export const Item = styled.div`
+export const AnyProductRegister = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    a{
+        color: ${({theme}) => theme.COLORS.TEXT_BLUE};
+    }
+`
+
+export const Item = styled.div<ItemProp>`
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
     border-radius: 0.8rem;
     padding-top: 5.6rem; 
-    padding-bottom: 4.0rem;
+    padding-bottom: 2.4rem;
     position: relative;
     width: 100%;
+    height: 46rem;
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-
+    
     > button{
         position: absolute;
         right: 1.6rem;
@@ -104,11 +118,13 @@ export const Item = styled.div`
     }
 
 
-    > .ingredients{
+    > .description{
         width: 100%;
+        height: 48px;
         text-align: center;
         padding-inline: 4rem;
         margin-bottom: 1.6rem;
+    
 
         > p{
             font: 400 1.4rem 'Roboto',sans-serif;
@@ -170,4 +186,26 @@ export const Item = styled.div`
             color: ${({ theme }) => theme.COLORS.TEXT_WHITE};
         }
     }   
+`
+
+export const DishItemLoader = styled.div`
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+    border-radius: 0.8rem;
+    padding-top: 5.6rem; 
+    padding-bottom: 4.0rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44.1rem;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+`
+
+export const ContentDishLoader = styled.div`
+
 `
