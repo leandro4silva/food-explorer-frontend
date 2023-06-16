@@ -1,18 +1,16 @@
-import { SelectHTMLAttributes, useState } from 'react';
 import { Container, Label, Trigger, Viewport, Separator, Value, Content } from "./styles";
 import * as SelectContent from '@radix-ui/react-select';
 import { CaretDown, Check, WarningCircle } from '@phosphor-icons/react';
 import { FieldValues } from 'react-hook-form';
 
 
-interface SelectProps{
+interface SelectProps extends SelectContent.SelectProps{
     label?: string,
     placeholder: string,
     name: string,
     register?: FieldValues,
     error?: string,
     children?: React.ReactNode,
-    onChange: (value: string) => void
 }
 
 interface OptionProps{
@@ -21,14 +19,15 @@ interface OptionProps{
 }
 
 
-export function Select({ label, children, name, placeholder, error, register, onChange, ...rest }: SelectProps) {
+export function Select({ label, children, name, placeholder, error, register, ...rest }: SelectProps) {
 
     return (
         <Container {...register}>
             <Label>{label}</Label>
-            <SelectContent.Root name={name} onValueChange={(value) => onChange(value)}>
+            <SelectContent.Root name={name} {...rest}>
                 <Trigger className={error ? 'has-error' : ''}>
-                    <Value placeholder={placeholder} />
+                    <Value placeholder={placeholder}>
+                    </Value>
 
                     <SelectContent.Icon>
                         <CaretDown size={24} />

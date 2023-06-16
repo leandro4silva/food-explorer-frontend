@@ -18,7 +18,7 @@ export function DishList({ title, dishs, isAdmin = false, loader = false }: Dish
     const [loaded, setLoaded] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    const [sliderRef, instanceRef] = useKeenSlider({
+    let [sliderRef, instanceRef] = useKeenSlider({
         initial: 0,
         slides: {
             perView: 3.5,
@@ -31,6 +31,10 @@ export function DishList({ title, dishs, isAdmin = false, loader = false }: Dish
             setLoaded(true);
         }
     });
+    
+    useEffect(() => {
+        instanceRef.current?.update()
+    }, [dishs])
 
     return (
         <Container>
@@ -38,7 +42,7 @@ export function DishList({ title, dishs, isAdmin = false, loader = false }: Dish
             <WrapperNavigation>
                 {
                     !loader ?
-                        dishs && dishs.length > 0 ?
+                        dishs && dishs.length > 0 &&
                             <Carousel ref={sliderRef} className="keen-slider">
                                 {
                                     dishs.map((dish) => {
@@ -48,29 +52,20 @@ export function DishList({ title, dishs, isAdmin = false, loader = false }: Dish
                                     })
                                 }
                             </Carousel>
-                            :
-                            <AnyProductRegister>
-                                <div>
-                                    <span>
-                                        Nenhum produto foi cadastrado nessa categoria ainda, para cadastrar
-                                        <Link to={"/admin/dish/create"}> clique aqui</Link>
-                                    </span>
-                                </div>
-                            </AnyProductRegister>
                         :
                         <>
                             <Carousel ref={sliderRef} className="keen-slider">
                                 <DishItemLoader className="keen-slider__slide">
-                                    <Loader />
+                                    <Loader width={30} height={30} />
                                 </DishItemLoader>
                                 <DishItemLoader className="keen-slider__slide">
-                                    <Loader />
+                                    <Loader width={30} height={30} />
                                 </DishItemLoader>
                                 <DishItemLoader className="keen-slider__slide">
-                                    <Loader />
+                                    <Loader width={30} height={30} />
                                 </DishItemLoader>
                                 <DishItemLoader className="keen-slider__slide">
-                                    <Loader />
+                                    <Loader width={30} height={30} />
                                 </DishItemLoader>
                             </Carousel>
                         </>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 interface ListItensProp {
@@ -65,7 +66,7 @@ export const NavItem = styled.li`
     }
 `
 
-export const Link = styled.a`
+export const NavLink = styled(Link)`
     color: ${({ theme }) => theme.COLORS.TEXT_GRAY_700};
     font: 400 1.6rem 'Roboto', sans-serif;
     display: flex;

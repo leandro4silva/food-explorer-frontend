@@ -75,7 +75,6 @@ export function CreateDish() {
     }
 
     function handleSelectCategory(value: string){
-        console.log(value)
         setCategory(value);
     }
 
@@ -84,11 +83,15 @@ export function CreateDish() {
             setError('ingredients', { type: 'custom', message: 'Selecione um ingrediente' });
         }
 
+        if(!category){
+            setError('category', { type: 'custom', message: 'Selecione uma categoria' });
+        }
+
         try {
             await api.post("/dishs", {
                 image: "",
                 name: data.name,
-                category: data.category,
+                category,
                 price: data.price,
                 description: data.description,
                 ingredients
@@ -114,6 +117,23 @@ export function CreateDish() {
             })
         }
     }
+
+    useEffect(() => {
+        let hasError = false;
+
+        Object.keys(errors).map((error) => {
+            if (error) {
+                hasError = true
+            }
+        })
+
+        if (hasError) {
+            toastAlert({
+                message: 'Alguns campos estão incorretos. Corrija os campos em vermelho.',
+                type: 'error'
+            });
+        }
+    }, [errors]);
 
     useEffect(() => {
         async function fetchCategory() {
@@ -158,7 +178,7 @@ export function CreateDish() {
                                 label="Categoria"
                                 name="category"
                                 placeholder="Selecione a categoria do prato"
-                                onChange={handleSelectCategory}
+                                onValueChange={handleSelectCategory}
                                 register={register('category')}
                                 error={errors.category?.message?.toString()}
                             >

@@ -10,7 +10,16 @@ export const Content = styled.div`
     padding-inline: 12.3rem;
     margin-top: 2.5rem;
     margin-bottom: 11.6rem;
+    min-height: 40rem;
 `;
+
+export const ContentLoader = styled.div`
+    width: 100%;
+    min-height: 39rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
 export const Back = styled.button`
     display: inline-flex;
@@ -48,12 +57,14 @@ export const Form = styled.form`
     }
 
     .two-input-group > .ingredients{
-        height: 100%;
+        display: flex;
+        flex-direction: column;
 
         > label {
             font: 400 1.6rem 'Roboto',sans-serif;
             line-height: 1.6rem;
             color: ${({ theme }) => theme.COLORS.TEXT_GRAY_800};
+            margin-bottom: 0.8rem;
         }
 
         > div{
@@ -61,10 +72,18 @@ export const Form = styled.form`
             flex-wrap: wrap;
             gap: 1.6rem;
             align-items: center;
-            padding: 0.8rem;
+            padding: 0.7rem;
             background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
-            margin-top: 0.8rem;
             border-radius: 0.4rem;
+        }
+
+        > span {
+            color: ${({ theme }) => theme.COLORS.ERROR_COLOR};
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            font: 400 1.4rem 'Roboto',sans-serif;
+            margin-top: 0.2rem;
         }
     }
 

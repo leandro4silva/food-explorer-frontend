@@ -1,4 +1,4 @@
-import { Container, Nav, ListItens, Logo, NavItem, Link, SignOutButton } from "./styles"
+import { Container, Nav, ListItens, Logo, NavItem, NavLink, SignOutButton } from "./styles"
 import { Input } from "../Input";
 import { Button } from "../Button";
 import Polygon from '../../assets/logo/polygon-blue.svg';
@@ -8,10 +8,11 @@ import { useAuth } from '../../hooks/auth';
 import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
-    isAdmin?: boolean
+    isAdmin?: boolean,
+    handleSearch: (searchValue: string) => void
 }
 
-export function Header({isAdmin = false} : HeaderProps) {
+export function Header({isAdmin = false, handleSearch} : HeaderProps) {
     const navigate = useNavigate();
     const {signOut} = useAuth();
 
@@ -34,7 +35,7 @@ export function Header({isAdmin = false} : HeaderProps) {
             <Nav>
                 <ListItens isAdmin={isAdmin}>
                     <Logo>
-                        <Link className="logo" href="">
+                        <NavLink className="logo" to={"/admin/dashboard"}>
                             <img src={Polygon} alt="Poligono azul" />
                             <h2>
                                 food explorer 
@@ -42,26 +43,26 @@ export function Header({isAdmin = false} : HeaderProps) {
                                    isAdmin ? <span>admin</span> : ''
                                 } 
                             </h2>
-                        </Link>
+                        </NavLink>
                     </Logo>
                     {
                         !isAdmin &&
                         <NavItem>
-                            <Link href="">
+                            <NavLink to={""}>
                                 Meus favoritos
-                            </Link>
+                            </NavLink>
                         </NavItem>
                     }
                     {
                         isAdmin &&
                         <NavItem>
-                            <Link href="">
+                            <NavLink to={""}>
                                 Histórico de pedidos
-                            </Link>
+                            </NavLink>
                         </NavItem>
                     }
                     <NavItem>
-                        <Input Icon={FiSearch} placeholder="Busque pelas opções de pratos" />
+                        <Input name="search" onChange={(e) => handleSearch(e.currentTarget.value)} Icon={FiSearch} placeholder="Busque pelas opções de pratos" />
                     </NavItem>
                     <NavItem>
                         {

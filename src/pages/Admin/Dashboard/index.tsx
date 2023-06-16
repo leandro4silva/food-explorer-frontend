@@ -40,10 +40,15 @@ export function Dashboard() {
     }
 
     async function getListDishsWithCategory() {
-        const response = await api.get("/dishs");
+        const response = await api.get("/dishs?dish");
         setListDishs(response.data);
     }
-    
+
+    async function handleSearchDish(searchValue: string) {
+        const response = await api.get(`/dishs?dish=${searchValue}`)
+        setListDishs(response.data)
+    }
+
     useEffect(() => {
         showSessionMessage();
         getListDishsWithCategory();
@@ -51,7 +56,7 @@ export function Dashboard() {
 
     return (
         <Container>
-            <Header isAdmin />
+            <Header isAdmin handleSearch={handleSearchDish} />
             <Content>
                 <BannerContent>
                     <Banner />
@@ -59,25 +64,26 @@ export function Dashboard() {
                 {
                     listDishs.length > 0 ?
                         listDishs.map((list, index) => {
-                            return (
-                                <ProductList key={list.id}>
-                                    <DishList title={list.category} dishs={list.dishs} isAdmin />
-                                </ProductList>
-                            )
+                            if(list.dishs.length > 0){
+                                return (
+                                    <ProductList key={list.id}>
+                                        <DishList title={list.category} dishs={list.dishs} isAdmin />
+                                    </ProductList>
+                                )
+                            } 
                         })
-                    :
-                    <>
-                        {
-                                Array.from({length: 3}).map((_, index) => {
-                                    return(
+                        :
+                        <>
+                            {
+                                Array.from({ length: 3 }).map((_, index) => {
+                                    return (
                                         <ProductList key={index}>
                                             <DishList loader isAdmin />
                                         </ProductList>
                                     )
                                 })
-                        }
-                    </>
-            
+                            }
+                        </>
                 }
             </Content>
             <Footer />

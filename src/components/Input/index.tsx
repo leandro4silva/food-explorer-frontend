@@ -12,10 +12,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     error?: string,
     mask?: object,
     placeholder: string,
-    name: string
+    name: string,
+    onAccept?: (value: string, mask: object) => void,
+    value?: string
 }
 
-export function Input({ Icon, label, name, placeholder, register, mask, error, ...rest }: InputProps) {
+export function Input({ Icon, label, name, placeholder, value, onAccept, register, mask, error, ...rest }: InputProps) {
     const ref = useRef(null);
     const inputRef = useRef(null);
 
@@ -30,11 +32,13 @@ export function Input({ Icon, label, name, placeholder, register, mask, error, .
                             <IMaskInput
                                 name={name}
                                 placeholder={placeholder}
+                                value={value}
+                                onAccept={onAccept}
+                                {...rest}
                                 {...mask}
-                                
                             />
                         :
-                            <input type="text" name={name} placeholder={placeholder} {...rest} />
+                            <input type="text" name={name} value={value} placeholder={placeholder} {...rest} />
                     }
                 </div>
                 {

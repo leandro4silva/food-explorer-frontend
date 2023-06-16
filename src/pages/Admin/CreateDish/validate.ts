@@ -11,9 +11,6 @@ export const createDishValidate = z.object({
       (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
       "Somente imagens no formato '.jpg', '.jpeg', '.png' e '.webp' são suportados."),
     name: z.string().nonempty("Você deve inserir um nome valido"),
-    category: z.string().nonempty({
-        message: "Selecione uma categoria"
-    }),
     price: z.string().nonempty("Você deve inserir um preço"),
     description: z.string().nonempty("Você deve inserir uma descrição "),
 })

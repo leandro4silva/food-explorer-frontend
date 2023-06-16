@@ -10,12 +10,19 @@ export const Content = styled.div`
     padding-inline: 12.3rem;
     margin-top: 2.5rem;
     margin-bottom: 8.9rem;
+    min-height: 40rem;
 
     > .detail-content{
         margin-top: 4.2rem;
         display: flex;
+        height: 100%;
         align-items: center;
+        justify-content: flex-start;
         gap: 4.7rem;
+
+        > img {
+            width: fit-content;
+        }
 
         > div h2{
             font: 500 4rem 'Poppins',sans-serif;
@@ -71,4 +78,16 @@ export const Back = styled.button`
     line-height: 3.3rem;
     background-color: transparent;
     border: none;
+`
+
+export const FixedFooter = styled.div`
+ 
+`
+
+export const ContentLoader = styled.div`
+    width: 100%;
+    min-height: 39rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
