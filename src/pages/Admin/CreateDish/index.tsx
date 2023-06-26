@@ -118,6 +118,10 @@ export function CreateDish() {
         }
     }
 
+    function handleSearchDish(searchValue: string){
+        console.log(searchValue);
+    }
+
     useEffect(() => {
         let hasError = false;
 
@@ -145,7 +149,7 @@ export function CreateDish() {
 
     return (
         <Container>
-            <Header isAdmin />
+            <Header isAdmin handleSearch={handleSearchDish} disableSearch />
             <Content>
                 <Back onClick={handleBack}>
                     <CaretLeft size={32} />

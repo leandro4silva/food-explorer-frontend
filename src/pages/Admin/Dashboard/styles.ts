@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
+    display: flex;
+    flex-direction: column;
     height: 100vh;
-    width: 100%;
-    place-content: center;
 `
 
 export const Content = styled.div`
     padding-inline: 12.3rem;
-    margin-top: 2.5rem;
 `
 
 export const BannerContent = styled.div`

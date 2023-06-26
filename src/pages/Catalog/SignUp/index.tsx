@@ -7,19 +7,33 @@ import { signUpValidate } from "./validate";
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { api } from "../../../services/api";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { ToastContent, toastAlert } from '../../../components/Toast';
 import { useAuth } from "../../../hooks/auth"
+import { useSession } from "../../../hooks/session";
 
+
+function useWindowSize() {
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+      function updateSize() {
+        setSize([window.innerWidth, window.innerHeight]);
+      }
+      window.addEventListener('resize', updateSize);
+      updateSize();
+      return () => window.removeEventListener('resize', updateSize);
+    }, []);
+    return size;
+}
 
 export function SignUp() {
+    const [width, height] = useWindowSize();
+    const {setMessageSession, sessionMessage } = useSession();
+    const { signIn } = useAuth();
+    const navigate = useNavigate();
     const { register, handleSubmit, setError, formState: { errors, isSubmitting }, } = useForm({
         resolver: zodResolver(signUpValidate)
     });
-
-    const { signIn } = useAuth();
-
-    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FieldValues> = async ({ email, name, password }) => {
         try {
@@ -29,9 +43,17 @@ export function SignUp() {
                 password
             });
 
+            
             if (response.status = 201) {
                 const hasError = await signIn({ email, password, isAdmin: false });
-                !hasError ? navigate("/") : null
+                if(!hasError){
+                    setMessageSession({
+                        message: `${name}, o seu cadastro foi realizado com sucesso, aproveite =)`,
+                        type: 'success'
+                    });
+
+                    navigate("/");
+                }
             }
         } catch (error: any) {
             if (error.response && error.response.data.type == 'email') {
@@ -69,15 +91,12 @@ export function SignUp() {
     return (
         <Container>
             <Logo>
-                <div>
+                <div className="logo">
                     <img src={Polygon} alt="Poligono azul" />
                     <h1>food explorer</h1>
                 </div>
-            </Logo>
-            <Content>
-                <div>
-                    <h2>Crie sua conta</h2>
-                    <Form onSubmit={handleSubmit(onSubmit)}>
+                <div className="form">
+                <Form onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             label="Seu nome"
                             name="name"
@@ -110,7 +129,47 @@ export function SignUp() {
                         <button type="button" className="link" onClick={() => navigate("/")}>Já tenho uma conta</button>
                     </Form>
                 </div>
-            </Content>
+            </Logo>
+            {
+                width > 1024 &&
+                <Content>
+                    <div>
+                        <h2>Crie sua conta</h2>
+                        <Form onSubmit={handleSubmit(onSubmit)}>
+                            <Input
+                                label="Seu nome"
+                                name="name"
+                                type="text"
+                                register={register("name")}
+                                error={errors.name?.message?.toString()}
+                                placeholder="Exemplo: Maria da Silva"
+                            />
+                            <Input
+                                label="Email"
+                                name="email"
+                                type="email"
+                                register={register("email")}
+                                placeholder="Exemplo: exemplo@exemplo.com"
+                                error={errors.email?.message?.toString()}
+                            />
+                            <Input
+                                label="Senha"
+                                name="password"
+                                type="password"
+                                register={register('password')}
+                                placeholder="No minimo 6 caracteres"
+                                error={errors.password?.message?.toString()}
+                            />
+                            <Button
+                                type="submit"
+                                text="Criar conta"
+                                loading={isSubmitting}
+                            />
+                            <button type="button" className="link" onClick={() => navigate("/")}>Já tenho uma conta</button>
+                        </Form>
+                    </div>
+                </Content>
+            }
             <ToastContent />
         </Container>
     );

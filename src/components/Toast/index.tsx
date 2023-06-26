@@ -1,10 +1,14 @@
-import { ToastContainer, toast, CloseButtonProps, IconProps } from 'react-toastify';;
+import { ToastContainer, toast, CloseButtonProps, IconProps, ToastContainerProps } from 'react-toastify';;
 import { Check, Warning, X } from '@phosphor-icons/react'
 import "react-toastify/ReactToastify.min.css";
 
 interface toastAlertProps{
     message: string,
-    type: string
+    type: string,
+}
+
+interface ToastContentProps{
+    autoClose?: number
 }
 
 
@@ -62,7 +66,6 @@ export function toastAlert({message, type = 'error'}: toastAlertProps) {
             icon: toastIcon,
             closeButton: closeButton, 
             type: "success"
-
         })
     }
 
@@ -85,11 +88,11 @@ export function toastAlert({message, type = 'error'}: toastAlertProps) {
 
 }
 
-export function ToastContent() {
+export function ToastContent({autoClose}: ToastContentProps) {
     return (
         <ToastContainer
             position="top-center"
-            autoClose={5000}
+            autoClose={autoClose ? autoClose : 5000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick

@@ -8,10 +8,23 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../../hooks/auth";
 import { ToastContent, toastAlert } from '../../../components/Toast';
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
+function useWindowSize() {
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+      function updateSize() {
+        setSize([window.innerWidth, window.innerHeight]);
+      }
+      window.addEventListener('resize', updateSize);
+      updateSize();
+      return () => window.removeEventListener('resize', updateSize);
+    }, []);
+    return size;
+}
 
 export function SignIn() {
+    const [width, height] = useWindowSize();
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm({
         resolver: zodResolver(signInValidate)
     });
@@ -62,14 +75,11 @@ export function SignIn() {
     return (
         <Container>
             <Logo>
-                <div>
+                <div className="logo">
                     <img src={Polygon} alt="Poligono azul" />
                     <h1>food explorer</h1>
                 </div>
-            </Logo>
-            <Content>
-                <div>
-                    <h2>Faça login</h2>
+                <div className="form">
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             label="Email"
@@ -95,7 +105,39 @@ export function SignIn() {
                         <button className="link" onClick={() => navigate("/register")}>Criar uma conta</button>
                     </Form>
                 </div>
-            </Content>
+            </Logo>
+            {
+                width > 1024 &&
+                    <Content>
+                        <div>
+                            <h2>Faça login</h2>
+                            <Form onSubmit={handleSubmit(onSubmit)}>
+                                <Input
+                                    label="Email"
+                                    name="email"
+                                    type="email"
+                                    register={register("email")}
+                                    placeholder="Exemplo: exemplo@exemplo.com.br"
+                                    error={errors.email?.message?.toString()}
+                                />
+                                <Input
+                                    label="Senha"
+                                    name="password"
+                                    type="password"
+                                    register={register("password")}
+                                    placeholder="No mínimo 6 caracteres"
+                                    error={errors.password?.message?.toString()}
+                                />
+                                <Button
+                                    type="submit"
+                                    text="Entrar"
+                                    loading={isSubmitting}
+                                />
+                                <button className="link" onClick={() => navigate("/register")}>Criar uma conta</button>
+                            </Form>
+                        </div>
+                    </Content>
+            }
             <ToastContent />
         </Container>
     );

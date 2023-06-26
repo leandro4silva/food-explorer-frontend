@@ -6,16 +6,19 @@ import DarkTheme from './styles/theme/dark';
 import { Router } from './router';
 import { AuthProvider } from './hooks/auth';
 import { SessionProvider } from './hooks/session';
+import { CartProvider } from './hooks/cart';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
   <AuthProvider>
-    <SessionProvider>
-      <ThemeProvider theme={DarkTheme}>
-        <GlobalStyles />
-        <Router />
-      </ThemeProvider>
-    </SessionProvider>
+    <CartProvider>
+      <SessionProvider>
+        <ThemeProvider theme={DarkTheme}>
+          <GlobalStyles />
+          <Router />
+        </ThemeProvider>
+      </SessionProvider>
+    </CartProvider>
   </AuthProvider>
 
 )

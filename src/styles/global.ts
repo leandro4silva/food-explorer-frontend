@@ -73,6 +73,14 @@ export default createGlobalStyle`
   width: 10px;
 }
 
+.Toastify__toast-container--top-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 /* Track */
 ::-webkit-scrollbar-track {
   background: ${({theme}) => theme.COLORS.BACKGROUND_900};

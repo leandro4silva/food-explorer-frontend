@@ -9,7 +9,7 @@ import { Loader } from "../Loader";
 
 interface DishListProps {
     title?: string,
-    isAdmin: boolean,
+    isAdmin?: boolean,
     dishs?: DishProps[],
     loader?: boolean
 }
@@ -21,8 +21,22 @@ export function DishList({ title, dishs, isAdmin = false, loader = false }: Dish
     let [sliderRef, instanceRef] = useKeenSlider({
         initial: 0,
         slides: {
-            perView: 3.5,
-            spacing: 27
+            perView: 1,
+            spacing: 5
+        },
+        breakpoints: {
+            "(min-width: 400px)": {
+              slides: { 
+                perView: 2, 
+                spacing: 16 
+              },
+            },
+            "(min-width: 1000px)": {
+              slides: { 
+                perView: 3.5,
+                spacing: 27
+              },
+            },
         },
         slideChanged(slider) {
             setCurrentSlide(slider.track.details.rel);
@@ -47,7 +61,7 @@ export function DishList({ title, dishs, isAdmin = false, loader = false }: Dish
                                 {
                                     dishs.map((dish) => {
                                         return (
-                                            <DishListItem key={dish.id} dish={dish} className="keen-slider__slide" isAdmin />
+                                            <DishListItem key={dish.id} dish={dish} className="keen-slider__slide" isAdmin={isAdmin} />
                                         )
                                     })
                                 }
@@ -72,6 +86,7 @@ export function DishList({ title, dishs, isAdmin = false, loader = false }: Dish
                 }
                 {loaded && instanceRef.current && instanceRef.current.slides.length > 3 && (
                     <>
+                    
                         <Arrow
                             left
                             onClick={(e: any) => e.stopPropagation() || instanceRef.current?.prev()}

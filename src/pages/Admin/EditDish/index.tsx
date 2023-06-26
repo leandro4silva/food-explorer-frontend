@@ -167,7 +167,7 @@ export function EditDish() {
 
     return (
         <Container>
-            <Header isAdmin handleSearch={handleSearchDish}/>
+            <Header isAdmin handleSearch={handleSearchDish} disableSearch/>
             <Content>
                 <Back onClick={handleBack}>
                     <CaretLeft size={32} />

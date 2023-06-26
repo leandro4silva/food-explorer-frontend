@@ -9,7 +9,7 @@ export function Footer(){
                 <h2>food explorer</h2>
             </div>
             <div className="copyright">
-                <h4>© 2022 - Todos os direitos reservados.</h4>
+                <h4>© 2023 - Todos os direitos reservados.</h4>
             </div>
         </Container>
     )

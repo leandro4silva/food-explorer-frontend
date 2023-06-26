@@ -43,7 +43,6 @@ export function Details(){
     }
 
     function handleSearchDish(searchValue: string){
-        console.log(searchValue)
     }
 
     useEffect(() => {
@@ -53,7 +52,7 @@ export function Details(){
 
     return(
         <Container>
-            <Header isAdmin handleSearch={handleSearchDish}/>
+            <Header isAdmin handleSearch={handleSearchDish} disableSearch/>
             <Content>
                 <Back onClick={handleBack}>
                     <CaretLeft size={32} /> voltar
