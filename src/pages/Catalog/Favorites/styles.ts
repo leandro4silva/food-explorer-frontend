@@ -97,7 +97,7 @@ export const AnyFavorite = styled.div`
 `
 
 export const LinkDish = styled(Link)`
-    font: 500 2rem 'Poppins', sans-serif;
+    font: 500 1.8rem 'Poppins', sans-serif;
     line-height: 3.2rem;
     color: ${({theme}) => theme.COLORS.TEXT_WHITE};
 `
