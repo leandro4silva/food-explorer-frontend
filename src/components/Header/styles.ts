@@ -57,7 +57,7 @@ export const ListItens = styled.ul<ListItensProp>`
         display: grid;
         align-items: center;
         height: 100%;
-        grid-template-columns: ${({isAdmin}) =>  isAdmin ? '1.4fr 1.1fr 4fr 2fr 0.2fr' : '1.6fr 0.9fr 4fr 1.9fr 0.2fr'};
+        grid-template-columns: ${({isAdmin}) =>  isAdmin ? '1.7fr 1.3fr 4fr 2fr 0.2fr' : '1.6fr 0.9fr 4fr 1.9fr 0.2fr'};
         column-gap: 3.2rem;
     }
 `
