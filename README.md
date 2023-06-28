@@ -31,7 +31,7 @@ With food explorer you can sell food online, organize your products and orders
 
 ## Tech Stack
 <img src="https://img.shields.io/badge/Nodejs-05122A?style=flat&logo=nodedotjs" alt="typescript Badge" height="25">&nbsp;
-<img src="https://img.shields.io/badge/Javascript-05122A?style=flat&logo=javascript" alt="react Badge" height="25">&nbsp;
+<img src="https://img.shields.io/badge/Javascript-05122A?style=flat&logo=typescript" alt="react Badge" height="25">&nbsp;
 <br>
 <br>
 
